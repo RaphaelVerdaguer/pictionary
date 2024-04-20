@@ -6,6 +6,17 @@ document.getElementById("roll-dice").addEventListener("click", () => {
   document.getElementById(
     "dice-result"
   ).textContent = `Résultat du dé: ${result}`;
+  let dice = document.getElementById("dice");
+  let diceFaces = dice.getElementsByClassName(`face`);
+  let diceDrawnedFace = dice.getElementsByClassName(`face-${result}`)[0];
+
+  console.log(diceFaces);
+  for (let diceFace of diceFaces) {
+    diceFace.style.display = "none";
+  }
+
+  diceDrawnedFace.style.display = "flex";
+
   movePlayer(currentPlayer, result);
   updatePlayerPosition(currentPlayer);
   // Met à jour le joueur actuel pour le prochain tour

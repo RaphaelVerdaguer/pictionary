@@ -1,0 +1,91 @@
+.face-1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .dice {
+    padding: 5px;
+    background-color: blanchedalmond;
+    width: 46px;
+    height: 46px;
+    border-radius: 10%;
+    margin-right : 0px;
+    
+    border: 2px solid white; /* Juste pour visualiser les cases */
+  }
+  .dot{
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color:rgba(0, 0, 0, 0.753);
+  }
+  
+  .face-2{
+    display: flex ;
+    justify-content: space-between;
+  }
+  
+  .face-2 .dot:nth-of-type(2) {
+    align-self: flex-end;
+  }
+  
+  .face-3 {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .face-3 .dot:nth-of-type(1) {
+    align-self :flex-end;
+  }
+  
+  .face-3 .dot:nth-of-type(2) {
+    align-self :center;
+  }
+  
+  
+  .face-4 , .face-6, .face-5{
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .face-4 .column , .face-6 .column, .face-5 .column{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .face-5 .column:nth-of-type(2) {
+    justify-content: center;
+  }
+  
+  
+  .face-1{
+    display: none ;
+  }
+  
+  .face-2{
+    display: none ;
+  }
+  
+  .face-3{
+    display: none ;
+  }
+  
+  .face-4{
+    display: none ;
+  }
+  
+  .face-5{
+    display: none ;
+  }
+  
+  .face-6{
+    display: none ;
+  }
+
+  
+#dice {
+    grid-column: 9;
+    grid-row: 9;
+  }

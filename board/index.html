@@ -4,10 +4,65 @@
   <meta charset="UTF-8">
   <title>Plateau de Pictionary</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="dice.css">
 </head>
 <body>
   <div id="game-board">
     <div id="center-piece">PICTIONARY</div>
+
+    <div id="dice">
+      <div class="dice face-1 face">
+        <span class="dot">
+        </span>
+      </div>
+      <div class="dice face-2 face">
+        <span class="dot">
+        </span>
+        <span class="dot">
+        </span>
+      </div>
+      <div class="dice face-3 face">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+      <div class="face-4 face dice">
+        <div class="column">
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+        <div class="column">
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+      <div class="face-5 face dice">
+        <div class="column">
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+        <div class="column">
+          <span class="dot"></span>
+        </div>
+        <div class="column">
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+      <div class="face-6 face dice">
+        <div class="column">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+        <div class="column">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+    </div>
+
     <div class="game-square yellow" id="square-0">P
       <span class="topComment">Start</span>
       <span id="player-0" class="player player-0" style="display: flex;">1</span>
@@ -77,13 +132,16 @@
       <span class="topComment">Finish</span></div>
   </div>
   
-<div>
-  <button id="roll-dice">Lancer le dé</button>
-  <span id="dice-result"></span>
-</div>
-<div>
-  <button id="draw-card">Tirer une carte</button>
-</div>
+  <div class="button-container">
+    <div>
+      <button id="roll-dice">Lancer le dé</button>
+      <span id="dice-result"></span>
+    </div>
+    <div>
+      <button id="draw-card">Tirer une carte</button>
+    </div>
+  <div>
+
   <script src="script.js"></script>
 </body>
 </html>
