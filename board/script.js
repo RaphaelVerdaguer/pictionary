@@ -4,10 +4,17 @@ let numberOfPlayers = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
   while (numberOfPlayers <= 1 || numberOfPlayers > 4) {
-    numberOfPlayers = prompt("Veuillez entrer le nombre de joueurs (Min. 2 - Max. 4):", "2");
+    numberOfPlayers = prompt(
+      "Veuillez entrer le nombre de joueurs (Min. 2 - Max. 4):",
+      "2"
+    );
     numberOfPlayers = parseInt(numberOfPlayers); // Convertit la chaîne de caractères en nombre
 
-    if (!isNaN(numberOfPlayers) && numberOfPlayers > 1 && numberOfPlayers <= 4) {
+    if (
+      !isNaN(numberOfPlayers) &&
+      numberOfPlayers > 1 &&
+      numberOfPlayers <= 4
+    ) {
       console.log(`Nombre de joueurs: ${numberOfPlayers}`);
       for (let i = 0; i < numberOfPlayers; i++) {
         let player = document.getElementsByClassName(`player-${i}`)[0];
@@ -38,7 +45,7 @@ document.getElementById("roll-dice").addEventListener("click", () => {
   movePlayer(currentPlayer, result);
   updatePlayerPosition(currentPlayer);
   // Met à jour le joueur actuel pour le prochain tour
-  currentPlayer = (currentPlayer + 1) % numberOfPlayers;
+  //currentPlayer = (currentPlayer + 1) % numberOfPlayers;
 });
 
 function movePlayer(playerId, steps) {
@@ -78,3 +85,15 @@ function updatePlayerPosition(playerId) {
 document.getElementById("draw-card").addEventListener("click", function () {
   window.open("../", "_blank");
 });
+
+document.getElementById("lose").addEventListener("click", function () {
+  currentPlayer = (currentPlayer + 1) % numberOfPlayers;
+  updatePlayerTurn();
+});
+
+function updatePlayerTurn() {
+  let joueur = document.getElementById("current-player");
+  joueur.textContent = `Joueur actuel: ${currentPlayer + 1}`;
+}
+
+updatePlayerTurn();
