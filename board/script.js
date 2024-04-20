@@ -45,3 +45,7 @@ function updatePlayerPosition(playerId) {
     playerSpan.style.display = "flex"; // Assurez-vous que le span est visible
   }
 }
+
+document.getElementById("draw-card").addEventListener("click", function () {
+  window.open("../", "_blank");
+});
