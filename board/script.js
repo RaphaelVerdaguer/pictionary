@@ -1,5 +1,23 @@
 let currentPlayer = 0;
 let currentPlayersPositions = [0, 0, 0, 0];
+let numberOfPlayers = 0;
+
+document.addEventListener("DOMContentLoaded", () => {
+  while (numberOfPlayers <= 1 || numberOfPlayers > 4) {
+    numberOfPlayers = prompt("Veuillez entrer le nombre de joueurs (Min. 2 - Max. 4):", "2");
+    numberOfPlayers = parseInt(numberOfPlayers); // Convertit la chaîne de caractères en nombre
+
+    if (!isNaN(numberOfPlayers) && numberOfPlayers > 1 && numberOfPlayers <= 4) {
+      console.log(`Nombre de joueurs: ${numberOfPlayers}`);
+      for (let i = 0; i < numberOfPlayers; i++) {
+        let player = document.getElementsByClassName(`player-${i}`)[0];
+        player.style.display = "flex";
+      }
+    } else {
+      alert("Veuillez entrer un nombre valide de joueurs.");
+    }
+  }
+});
 
 document.getElementById("roll-dice").addEventListener("click", () => {
   const result = Math.floor(Math.random() * 6) + 1;
@@ -20,7 +38,7 @@ document.getElementById("roll-dice").addEventListener("click", () => {
   movePlayer(currentPlayer, result);
   updatePlayerPosition(currentPlayer);
   // Met à jour le joueur actuel pour le prochain tour
-  currentPlayer = (currentPlayer + 1) % 4;
+  currentPlayer = (currentPlayer + 1) % numberOfPlayers;
 });
 
 function movePlayer(playerId, steps) {
