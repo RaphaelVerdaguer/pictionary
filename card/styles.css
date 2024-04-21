@@ -56,26 +56,6 @@
   }
 }
 
-#yellow {
-  background-color: var(--yellow-color);
-}
-
-#blue {
-  background-color: var(--blue-color);
-}
-
-#orange {
-  background-color: var(--orange-color);
-}
-
-#green {
-  background-color: var(--green-color);
-}
-
-#red {
-  background-color: var(--red-color);
-}
-
 button {
   margin-top: 20px;
 }
