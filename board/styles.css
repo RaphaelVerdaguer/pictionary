@@ -99,8 +99,8 @@ button:hover {
 
 /* Le centre du plateau */
 #center-piece {
-  grid-column: 4/6;
-  grid-row: 4/6;
+  grid-column: 4/11;
+  grid-row: 4/11;
   z-index: 10;
   background: black;
   color: white;
