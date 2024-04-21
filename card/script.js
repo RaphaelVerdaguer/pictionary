@@ -112,3 +112,10 @@ function startTimer(duration) {
 
 drawButton.addEventListener("click", drawCard);
 seeButton.addEventListener("click", seeCard);
+
+document.addEventListener('DOMContentLoaded', function() {
+  var card = document.querySelector('.flip-card-inner');
+  card.addEventListener('click', function() {
+    this.classList.toggle('is-flipped');
+  });
+});
