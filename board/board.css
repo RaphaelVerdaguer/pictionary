@@ -42,14 +42,6 @@
 }
 
 
-/* Styles spécifiques pour les couleurs */
-.red { background-color: var(--red-color); }
-.blue { background-color: var(--blue-color);  }
-.green { background-color: var(--green-color); }
-.yellow { background-color: var(--yellow-color); }
-.orange { background-color: var(--orange-color); }
-.black { background-color: var(--black-color); }
-
 /* Le centre du plateau */
 #center-piece {
   grid-column: 4/11;

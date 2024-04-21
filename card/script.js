@@ -41,7 +41,7 @@ const categoriesTitle = {
 function displayCard(card) {
   for (const [color, value] of Object.entries(card)) {
     const categoryContentElement = document
-      .getElementById(color)
+      .getElementsByClassName(color)[0]
       .getElementsByClassName("category-content")[0];
     categoryContentElement.textContent =
       value.charAt(0).toUpperCase() + value.slice(1);
