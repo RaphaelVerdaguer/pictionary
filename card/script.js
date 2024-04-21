@@ -48,23 +48,9 @@ function displayCard(card) {
   }
 }
 
-function blurCategoriesValue() {
-  // Floute les valeurs des catégories
-  const categoryContentElements =
-    document.querySelectorAll(".category-content");
-  categoryContentElements.forEach((element) => {
-    element.classList.add("blur");
-    element.classList.add("mask-text");
-  });
-}
-
-function unBlurCategoriesValue() {
-  const categoryContentElements =
-    document.querySelectorAll(".category-content");
-  categoryContentElements.forEach((element) => {
-    element.classList.remove("blur");
-    element.classList.remove("mask-text");
-  });
+function flipCard() {
+  var cardo = document.querySelector('.flip-card-inner');
+  cardo.classList.toggle('is-flipped');
 }
 
 function seeCard() {
@@ -99,13 +85,13 @@ function startTimer(duration) {
     drawButton.textContent = timerValue + " s"; // Met à jour le temps restant dans le bouton
 
     if (duration - timerValue == 2) {
-      blurCategoriesValue();
+      flipCard();
     }
     if (timerValue <= 0) {
       clearInterval(timer);
       drawButton.disabled = false; // Réactive le bouton
       drawButton.textContent = "Tirer une carte"; // Affiche le texte initial dans le bouton
-      unBlurCategoriesValue();
+      flipCard();
     }
   }, 1000);
 }
@@ -116,6 +102,6 @@ seeButton.addEventListener("click", seeCard);
 document.addEventListener('DOMContentLoaded', function() {
   var card = document.querySelector('.flip-card-inner');
   card.addEventListener('click', function() {
-    this.classList.toggle('is-flipped');
+    flipCard();
   });
 });
