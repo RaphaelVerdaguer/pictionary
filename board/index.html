@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Plateau de Pictionary</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="player.css">
+  <link rel="stylesheet" href="board.css">
+  <link rel="stylesheet" href="dice.css">
+</head>
+<body>
+  <div id="game-board">
+    <div id="center-piece">PICTIONARY</div>
+
+    <div id="dice">
+      <div class="dice face-1 face">
+        <span class="dot">
+        </span>
+      </div>
+      <div class="dice face-2 face">
+        <span class="dot">
+        </span>
+        <span class="dot">
+        </span>
+      </div>
+      <div class="dice face-3 face">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+      <div class="face-4 face dice">
+        <div class="column">
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+        <div class="column">
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+      <div class="face-5 face dice">
+        <div class="column">
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+        <div class="column">
+          <span class="dot"></span>
+        </div>
+        <div class="column">
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+      <div class="face-6 face dice">
+        <div class="column">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+        <div class="column">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="game-square yellow" id="square-0">P
+      <span class="topComment">Start</span>
+      <span id="player-0" class="player player-0" style="display: none;">1</span>
+      <span id="player-1" class="player player-1" style="display: none;">2</span>
+      <span id="player-2" class="player player-2" style="display: none;">3</span>
+      <span id="player-3" class="player player-3" style="display: none;">4</span>
+    </div>
+    <div class="game-square blue" id="square-1">O</div>
+    <div class="game-square orange" id="square-2">A</div>
+    <div class="game-square green" id="square-3">D</div>
+    <div class="game-square red" id="square-4">AP</div>
+    <div class="game-square yellow" id="square-5">P</div>
+    <div class="game-square blue" id="square-6">O</div>
+    <div class="game-square orange" id="square-7">A</div>
+    <div class="game-square green" id="square-8">D</div>
+    <div class="game-square red" id="square-9">AP</div>
+
+    <div class="game-square yellow" id="square-10">P</div>
+    <div class="game-square blue" id="square-11">O</div>
+    <div class="game-square orange" id="square-12">A</div>
+    <div class="game-square green" id="square-13">D</div>
+    <div class="game-square red" id="square-14">AP</div>
+    <div class="game-square yellow" id="square-15">P</div>
+    <div class="game-square blue" id="square-16">O</div>
+    <div class="game-square orange" id="square-17">A</div>
+    <div class="game-square green" id="square-18">D</div>
+    <div class="game-square red" id="square-19">AP</div>
+
+    <div class="game-square yellow" id="square-20">P</div>
+    <div class="game-square blue" id="square-21">O</div>
+    <div class="game-square orange" id="square-22">A</div>
+    <div class="game-square green" id="square-23">D</div>
+    <div class="game-square red" id="square-24">AP</div>
+    <div class="game-square yellow" id="square-25">P</div>
+    <div class="game-square blue" id="square-26">O</div>
+    <div class="game-square orange" id="square-27">A</div>
+    <div class="game-square green" id="square-28">D</div>
+    <div class="game-square red" id="square-29">AP</div>
+
+    <div class="game-square yellow" id="square-30">P</div>
+    <div class="game-square blue" id="square-31">O</div>
+    <div class="game-square orange" id="square-32">A</div>
+    <div class="game-square green" id="square-33">D</div>
+    <div class="game-square red" id="square-34">AP</div>
+    <div class="game-square yellow" id="square-35">P</div>
+    <div class="game-square blue" id="square-36">O</div>
+    <div class="game-square orange" id="square-37">A</div>
+    <div class="game-square green" id="square-38">D</div>
+    <div class="game-square red" id="square-39">AP</div>
+
+    <div class="game-square yellow" id="square-40">P</div>
+    <div class="game-square blue" id="square-41">O</div>
+    <div class="game-square orange" id="square-42">A</div>
+    <div class="game-square green" id="square-43">D</div>
+    <div class="game-square red" id="square-44">AP</div>
+    <div class="game-square yellow" id="square-45">P</div>
+    <div class="game-square blue" id="square-46">O</div>
+    <div class="game-square orange" id="square-47">A</div>
+    <div class="game-square green" id="square-48">D</div>
+    <div class="game-square red" id="square-49">AP</div>
+    
+    <div class="game-square yellow" id="square-50">P</div>
+    <div class="game-square blue" id="square-51">O</div>
+    <div class="game-square orange" id="square-52">A</div>
+    <div class="game-square green" id="square-53">D</div>
+    <div class="game-square red" id="square-54">AP
+      <span class="topComment">Finish</span></div>
+  </div>
+  
+  <div class="button-container">
+    <div>
+      <button id="roll-dice">Lancer le dés</button>
+      <span id="dice-result"></span>
+    </div>
+    <div>
+      <button id="lose">Passer le dés</button>
+      <span id="current-player"></span>
+    </div>
+    <div>
+      <button id="draw-card">Tirer une carte</button>
+    </div>
+  <div>
+
+  <script src="script.js"></script>
+</body>
+</html>
