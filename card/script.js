@@ -86,7 +86,7 @@ function startTimer(duration) {
     timerValue--;
     drawButton.textContent = timerValue + " s"; // Met à jour le temps restant dans le bouton
 
-    if (duration - timerValue == 2) {
+    if (duration - timerValue == 1) {
       flipCard();
     }
     if (timerValue <= 0) {
