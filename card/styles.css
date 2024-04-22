@@ -57,6 +57,10 @@
   transform: rotateY(180deg);
   padding: var(--marge); /* Marge intérieure pour pousser l'enfant */
   box-sizing: border-box; /* S'assurer que le padding est inclus dans la largeur/hauteur */
+  position: relative; /* Conteneur parent relatif pour le positionnement absolu des enfants */
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center; /* Centre verticalement */
 } 
 
 
@@ -107,6 +111,7 @@
   display: flex; 
   align-items: center; 
   justify-content: center; 
+  z-index: 1; /* S'assure que game-board est au-dessus des autres éléments */
 }
 
 .custom-shape::after { 
