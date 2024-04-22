@@ -1,10 +1,20 @@
 
 :root {
-  --square-size: 60px;
+  --square-size: 55px;
   --square-border-size: 2px;
   --large-font-size: calc(var(--square-size) / 2.5);
   --medium-font-size: calc(var(--square-size) / 4);
   --small-font-size: calc(var(--square-size) / 6);
+}
+body{
+  background-color:rgb(0,0,0);
+  background-image:url(http://www.zingerbugimages.com/backgrounds/white_marble_background_seamless.jpg);
+  background-position:top left;
+  background-repeat:repeat;
+  background-attachment:fixed;
+  
+  display: flex;
+  align-items: baseline;
 }
 
 .topComment {
@@ -15,6 +25,18 @@
   justify-content: center;
   font-size: var(--small-font-size);
   color: black;
+}
+
+#game-board-border {
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center; /* Centre verticalement */
+  width: calc(var(--square-size) * 12); /* 11 cases * 60px chaque */
+  height: calc(var(--square-size) * 12); /* Même hauteur que largeur */
+  margin: 0 auto;
+  background-color: black;
+  border: 1px solid white; /* Juste pour visualiser les cases */
+  border-radius: 5px;
 }
 
 #game-board {

@@ -4,10 +4,11 @@
     align-items: center;
   }
   .dice {
-    padding: 5px;
+    padding: calc(var(--square-size) * 0.08);
     background-color: blanchedalmond;
-    width: 46px;
-    height: 46px;
+    
+    width: calc(var(--square-size) * 0.8 - 4px);
+    height: calc(var(--square-size) * 0.8 - 4px);
     border-radius: 10%;
     margin-right : 0px;
     
@@ -15,8 +16,8 @@
   }
   .dot{
     display: block;
-    width: 15px;
-    height: 15px;
+    width: calc(var(--square-size) / 4);
+    height: calc(var(--square-size) / 4);
     border-radius: 50%;
     background-color:rgba(0, 0, 0, 0.753);
   }
