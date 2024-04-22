@@ -23,8 +23,8 @@ xhr.onload = function () {
 };
 
 // Gérer les erreurs réseau
-xhr.onerror = function() {
-  console.error('Erreur réseau lors du chargement du fichier JSON');
+xhr.onerror = function () {
+  console.error("Erreur réseau lors du chargement du fichier JSON");
 };
 
 // Envoyer la requête
@@ -38,8 +38,15 @@ const categoriesTitle = {
   red: "défi",
 };
 
-function displayCard(card) {
-  for (const [color, value] of Object.entries(card)) {
+
+var card = document.querySelector(".flip-card-inner");
+const drawButton = document.querySelector(".drawButton");
+
+let timer;
+const timerDelay = 60;
+
+function displayCard(cardData) {
+  for (const [color, value] of Object.entries(cardData)) {
     const categoryContentElement = document
       .getElementsByClassName(color)[0]
       .getElementsByClassName("category-content")[0];
@@ -49,31 +56,26 @@ function displayCard(card) {
 }
 
 function flipCard() {
-  var cardo = document.querySelector('.flip-card-inner');
-  cardo.classList.toggle('is-flipped');
+  card.classList.toggle("is-flipped");
 }
 
 function seeCard() {
-  unBlurCategoriesValue();
-  setTimeout(blurCategoriesValue, 2000);
+  flipCard();
+  setTimeout(flipCard, 2000);
 }
-
-const drawButton = document.querySelector(".drawButton");
-const seeButton = document.querySelector(".seeButton");
-let timer;
 
 function drawCard() {
   drawButton.disabled = true; // Désactive le bouton
-  startTimer(60); // Commence le timer avec une durée de 60 secondes
+  startTimer(timerDelay); // Commence le timer avec une durée de 60 secondes
 
-  const card = {};
+  const cardData = {};
 
   for (const [color, category] of Object.entries(categories)) {
     const randomIndex = Math.floor(Math.random() * category.length);
-    card[color] = category[randomIndex];
+    cardData[color] = category[randomIndex];
   }
 
-  displayCard(card);
+  displayCard(cardData);
 }
 
 function startTimer(duration) {
@@ -96,12 +98,7 @@ function startTimer(duration) {
   }, 1000);
 }
 
-drawButton.addEventListener("click", drawCard);
-seeButton.addEventListener("click", seeCard);
-
-document.addEventListener('DOMContentLoaded', function() {
-  var card = document.querySelector('.flip-card-inner');
-  card.addEventListener('click', function() {
-    flipCard();
-  });
+document.addEventListener("DOMContentLoaded", function () {
+  card.addEventListener("click", seeCard);
+  drawButton.addEventListener("click", drawCard);
 });
