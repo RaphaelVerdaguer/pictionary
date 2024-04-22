@@ -43,7 +43,8 @@ var card = document.querySelector(".flip-card-inner");
 const drawButton = document.querySelector(".drawButton");
 
 let timer;
-const timerDelay = 60;
+const timerDelayS = 60;
+const showCardDelayS = 5;
 
 function displayCard(cardData) {
   for (const [color, value] of Object.entries(cardData)) {
@@ -61,12 +62,12 @@ function flipCard() {
 
 function seeCard() {
   flipCard();
-  setTimeout(flipCard, 2000);
+  setTimeout(flipCard, showCardDelayS * 1000);
 }
 
 function drawCard() {
   drawButton.disabled = true; // Désactive le bouton
-  startTimer(timerDelay); // Commence le timer avec une durée de 60 secondes
+  startTimer(timerDelayS); // Commence le timer avec une durée de 60 secondes
 
   const cardData = {};
 
@@ -86,7 +87,7 @@ function startTimer(duration) {
     timerValue--;
     drawButton.textContent = timerValue + " s"; // Met à jour le temps restant dans le bouton
 
-    if (duration - timerValue == 1) {
+    if (duration - timerValue == showCardDelayS) {
       flipCard();
     }
     if (timerValue <= 0) {
