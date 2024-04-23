@@ -1,5 +1,6 @@
 let currentPlayer = 0;
 let currentPlayersPositions = [0, 0, 0, 0];
+let currentDiceResult = 0;
 let numberOfPlayers = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -27,13 +28,18 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.getElementById("roll-dice").addEventListener("click", () => {
-  const result = Math.floor(Math.random() * 6) + 1;
+  if (currentDiceResult)
+    getDrawnedDiceFace().classList.remove(`player-${currentPlayer}-color`);
+  currentDiceResult = Math.floor(Math.random() * 6) + 1;
+  getDrawnedDiceFace().classList.add(`player-${currentPlayer}-color`);
   document.getElementById(
     "dice-result"
-  ).textContent = `Résultat du dé: ${result}`;
+  ).textContent = `Résultat du dé: ${currentDiceResult}`;
   let dice = document.getElementById("dice");
   let diceFaces = dice.getElementsByClassName(`face`);
-  let diceDrawnedFace = dice.getElementsByClassName(`face-${result}`)[0];
+  let diceDrawnedFace = dice.getElementsByClassName(
+    `face-${currentDiceResult}`
+  )[0];
 
   console.log(diceFaces);
   for (let diceFace of diceFaces) {
@@ -41,8 +47,9 @@ document.getElementById("roll-dice").addEventListener("click", () => {
   }
 
   diceDrawnedFace.style.display = "flex";
+  diceDrawnedFace.classList.add(`player-${currentPlayer}-color`);
 
-  movePlayer(currentPlayer, result);
+  movePlayer(currentPlayer, currentDiceResult);
   updatePlayerPosition(currentPlayer);
   // Met à jour le joueur actuel pour le prochain tour
   //currentPlayer = (currentPlayer + 1) % numberOfPlayers;
@@ -70,6 +77,12 @@ function getPlayer(playerId) {
   return document.getElementById(`player-${playerId}`);
 }
 
+function getDrawnedDiceFace() {
+  return document
+    .getElementById("dice")
+    .getElementsByClassName(`face-${currentDiceResult}`)[0];
+}
+
 function updatePlayerPosition(playerId) {
   // Récupère l'élément span du joueur
   const playerSpan = getPlayer(playerId);
@@ -90,8 +103,10 @@ document.getElementById("draw-card").addEventListener("click", function () {
   window.open("../card/", "_blank");
 });
 
-document.getElementById("lose").addEventListener("click", function () {
+document.getElementById("change-player").addEventListener("click", function () {
+  getDrawnedDiceFace().classList.remove(`player-${currentPlayer}-color`);
   currentPlayer = (currentPlayer + 1) % numberOfPlayers;
+  getDrawnedDiceFace().classList.add(`player-${currentPlayer}-color`);
   updatePlayerTurn();
 });
 
