@@ -1,3 +1,9 @@
+:root {
+  --dice-background-color: var(--color-light-gray-dark);
+  --dice-border-color: var(--color-medium-gray-dark);
+  --dice-dot-color: var(--color-dark-gray-dark);
+}
+
 .face-1 {
     display: flex;
     justify-content: center;
@@ -5,21 +11,21 @@
   }
   .dice {
     padding: calc(var(--square-size) * 0.08);
-    background-color: blanchedalmond;
+    background-color: var(--dice-background-color);
     
     width: calc(var(--square-size) * 0.8 - 4px);
     height: calc(var(--square-size) * 0.8 - 4px);
     border-radius: 10%;
     margin-right : 0px;
     
-    border: 2px solid white; /* Juste pour visualiser les cases */
+    border: 2px solid var(--dice-border-color); /* Juste pour visualiser les cases */
   }
   .dot{
     display: block;
     width: calc(var(--square-size) / 4);
     height: calc(var(--square-size) / 4);
     border-radius: 50%;
-    background-color:rgba(0, 0, 0, 0.753);
+    background-color: var(--dice-dot-color);
   }
   
   .face-2{
