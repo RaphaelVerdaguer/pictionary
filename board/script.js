@@ -1,6 +1,6 @@
 let currentPlayer = 0;
 let currentPlayersPositions = [0, 0, 0, 0];
-let currentDiceResult = 0;
+let currentDiceResult = 6;
 let numberOfPlayers = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -27,33 +27,34 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-document.getElementById("roll-dice").addEventListener("click", () => {
-  if (currentDiceResult)
-    getDrawnedDiceFace().classList.remove(`player-${currentPlayer}-color`);
+function rollDice() {
   currentDiceResult = Math.floor(Math.random() * 6) + 1;
-  getDrawnedDiceFace().classList.add(`player-${currentPlayer}-color`);
-  document.getElementById(
-    "dice-result"
-  ).textContent = `Résultat du dé: ${currentDiceResult}`;
+}
+
+function updateDiceDisplay() {
   let dice = document.getElementById("dice");
   let diceFaces = dice.getElementsByClassName(`face`);
   let diceDrawnedFace = dice.getElementsByClassName(
     `face-${currentDiceResult}`
   )[0];
 
-  console.log(diceFaces);
   for (let diceFace of diceFaces) {
     diceFace.style.display = "none";
   }
 
   diceDrawnedFace.style.display = "flex";
   diceDrawnedFace.classList.add(`player-${currentPlayer}-color`);
+}
 
+function diceAction() {
+  if (currentDiceResult)
+    getDrawnedDiceFace().classList.remove(`player-${currentPlayer}-color`);
+  rollDice();
+  getDrawnedDiceFace().classList.add(`player-${currentPlayer}-color`);
+  updateDiceDisplay();
   movePlayer(currentPlayer, currentDiceResult);
   updatePlayerPosition(currentPlayer);
-  // Met à jour le joueur actuel pour le prochain tour
-  //currentPlayer = (currentPlayer + 1) % numberOfPlayers;
-});
+}
 
 function movePlayer(playerId, steps) {
   let currentPlayerPosition = currentPlayersPositions[playerId];
@@ -99,6 +100,11 @@ function updatePlayerPosition(playerId) {
   }
 }
 
+function updatePlayerTurn() {
+  let joueur = document.getElementById("current-player");
+  joueur.textContent = `Joueur actuel: ${currentPlayer + 1}`;
+}
+
 document.getElementById("draw-card").addEventListener("click", function () {
   window.open("../card/", "_blank");
 });
@@ -110,9 +116,7 @@ document.getElementById("change-player").addEventListener("click", function () {
   updatePlayerTurn();
 });
 
-function updatePlayerTurn() {
-  let joueur = document.getElementById("current-player");
-  joueur.textContent = `Joueur actuel: ${currentPlayer + 1}`;
-}
-
 updatePlayerTurn();
+updateDiceDisplay();
+
+document.getElementById("dice").addEventListener("click", diceAction);
