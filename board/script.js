@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ) {
       console.log(`Nombre de joueurs: ${numberOfPlayers}`);
       for (let i = 0; i < numberOfPlayers; i++) {
-        let player = document.getElementsByClassName(`player-${i}`)[0];
+        let player = getPlayer(i);
         player.style.display = "flex";
       }
     } else {
@@ -66,9 +66,13 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("Le plateau de jeu Pictionary est prêt !");
 });
 
+function getPlayer(playerId) {
+  return document.getElementById(`player-${playerId}`);
+}
+
 function updatePlayerPosition(playerId) {
   // Récupère l'élément span du joueur
-  const playerSpan = document.getElementById(`player-${playerId}`);
+  const playerSpan = getPlayer(playerId);
 
   // Récupère la case cible où le joueur doit être déplacé
   const targetSquare = document.getElementById(
