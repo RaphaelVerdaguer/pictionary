@@ -1,4 +1,3 @@
-
 :root {
   --marge: 30px;
   --cornerSize: calc(var(--marge));
@@ -36,7 +35,8 @@
 }
 
 /* Position the front and back side */
-.flip-card-front, .flip-card-back {
+.flip-card-front,
+.flip-card-back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -62,8 +62,7 @@
   display: flex;
   justify-content: center; /* Centre horizontalement */
   align-items: center; /* Centre verticalement */
-} 
-
+}
 
 .title {
   font-size: xx-large;
@@ -72,7 +71,7 @@
   margin-left: 25px;
   margin-right: 20px;
   letter-spacing: calc(5px);
-  font-stretch:ultra-expanded; /* Augmente la hauteur des lettres */
+  font-stretch: ultra-expanded; /* Augmente la hauteur des lettres */
   text-decoration: underline; /* Ajoute une ligne sous le mot */
   text-decoration-thickness: 7px; /* Épaissit la ligne */
   text-underline-offset: 10px; /* Décale la ligne vers le bas de 3 pixels */
@@ -95,50 +94,50 @@
   transition: filter 0.5s ease; /* Ajoute une transition pour une animation fluide */
 }
 
-.custom-shape { 
+.custom-shape {
   width: 100%;
   height: 100%;
   position: relative;
   background-color: black;
   clip-path: polygon(
-    var(--cornerSize) 0%, 
-    var(--cornerSize) var(--cornerSize), 
-    0% var(--cornerSize),  
-    0% var(--sizeMinusCorner), 
-    var(--cornerSize) var(--sizeMinusCorner), 
-    var(--cornerSize) 100%,  
-    var(--sizeMinusCorner) 100%, 
-    var(--sizeMinusCorner) var(--sizeMinusCorner), 
-    100% var(--sizeMinusCorner), 
-    100% var(--cornerSize), 
-    var(--sizeMinusCorner) var(--cornerSize), 
+    var(--cornerSize) 0%,
+    var(--cornerSize) var(--cornerSize),
+    0% var(--cornerSize),
+    0% var(--sizeMinusCorner),
+    var(--cornerSize) var(--sizeMinusCorner),
+    var(--cornerSize) 100%,
+    var(--sizeMinusCorner) 100%,
+    var(--sizeMinusCorner) var(--sizeMinusCorner),
+    100% var(--sizeMinusCorner),
+    100% var(--cornerSize),
+    var(--sizeMinusCorner) var(--cornerSize),
     var(--sizeMinusCorner) 0%
-  ); 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 1; /* S'assure que game-board est au-dessus des autres éléments */
 }
 
-.custom-shape::after { 
-  content: ""; 
+.custom-shape::after {
+  content: "";
   width: calc(100% - 5px);
   height: calc(100% - 5px);
-  position: absolute; 
-  background-color: #f8f8f8; 
-  
+  position: absolute;
+  background-color: #f8f8f8;
+
   clip-path: polygon(
-    var(--cornerSize) 0%, 
-    var(--cornerSize) var(--cornerSize), 
-    0% var(--cornerSize),  
-    0% var(--sizeMinusCorner), 
-    var(--cornerSize) var(--sizeMinusCorner), 
-    var(--cornerSize) 100%,  
-    var(--sizeMinusCorner) 100%, 
-    var(--sizeMinusCorner) var(--sizeMinusCorner), 
-    100% var(--sizeMinusCorner), 
-    100% var(--cornerSize), 
-    var(--sizeMinusCorner) var(--cornerSize), 
+    var(--cornerSize) 0%,
+    var(--cornerSize) var(--cornerSize),
+    0% var(--cornerSize),
+    0% var(--sizeMinusCorner),
+    var(--cornerSize) var(--sizeMinusCorner),
+    var(--cornerSize) 100%,
+    var(--sizeMinusCorner) 100%,
+    var(--sizeMinusCorner) var(--sizeMinusCorner),
+    100% var(--sizeMinusCorner),
+    100% var(--cornerSize),
+    var(--sizeMinusCorner) var(--cornerSize),
     var(--sizeMinusCorner) 0%
-  ); 
-} 
+  );
+}
