@@ -50,7 +50,6 @@ function diceAction() {
   if (currentDiceResult)
     getDrawnedDiceFace().classList.remove(`player-${currentPlayer}-color`);
   rollDice();
-  getDrawnedDiceFace().classList.add(`player-${currentPlayer}-color`);
   updateDiceDisplay();
   movePlayer(currentPlayer, currentDiceResult);
   updatePlayerPosition(currentPlayer);
@@ -68,11 +67,6 @@ function movePlayer(playerId, steps) {
   currentPlayersPositions[playerId] = currentPlayerPosition;
   console.log(currentPlayersPositions);
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  // Logique pour la gestion des mouvements ou de l'état du jeu
-  console.log("Le plateau de jeu Pictionary est prêt !");
-});
 
 function getPlayer(playerId) {
   return document.getElementById(`player-${playerId}`);
@@ -100,23 +94,36 @@ function updatePlayerPosition(playerId) {
   }
 }
 
-function updatePlayerTurn() {
-  let joueur = document.getElementById("current-player");
-  joueur.textContent = `Joueur actuel: ${currentPlayer + 1}`;
-}
-
 document.getElementById("draw-card").addEventListener("click", function () {
   window.open("../card/", "_blank");
 });
 
-document.getElementById("change-player").addEventListener("click", function () {
-  getDrawnedDiceFace().classList.remove(`player-${currentPlayer}-color`);
-  currentPlayer = (currentPlayer + 1) % numberOfPlayers;
-  getDrawnedDiceFace().classList.add(`player-${currentPlayer}-color`);
-  updatePlayerTurn();
+function changePlayer(event) {
+  if (event) {
+    // Ici, 'event.target' fait référence à l'élément cliqué (le span du joueur).
+    const playerId = event.target.id;
+    // Utilisation d'une expression régulière pour extraire le numéro à la fin de l'ID
+    const playerNumberMatch = playerId.match(/player-(\d+)/);
+    const playerNumber = playerNumberMatch ? playerNumberMatch[1] : null;
+
+    // Ou, pour incrémenter un compteur de score ou changer la position, etc.
+    // Vous pouvez utiliser 'playerSpan.id' pour identifier le joueur spécifique si nécessaire.
+
+    getDrawnedDiceFace().classList.remove(`player-${currentPlayer}-color`);
+    currentPlayer = playerNumber;
+    updateDiceDisplay();
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Logique pour la gestion des mouvements ou de l'état du jeu
+  console.log("Le plateau de jeu Pictionary est prêt !");
+
+  updateDiceDisplay();
+
+  document.getElementById("dice").addEventListener("click", diceAction);
+  document.getElementById("player-0").addEventListener("click", changePlayer);
+  document.getElementById("player-1").addEventListener("click", changePlayer);
+  document.getElementById("player-2").addEventListener("click", changePlayer);
+  document.getElementById("player-3").addEventListener("click", changePlayer);
 });
-
-updatePlayerTurn();
-updateDiceDisplay();
-
-document.getElementById("dice").addEventListener("click", diceAction);
