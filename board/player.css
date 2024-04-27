@@ -29,6 +29,19 @@
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
+.selected {
+  animation: border-blink 1s infinite alternate; /* Animation de clignotement de l'ombre */
+}
+
+@keyframes border-blink {
+  from {
+    border: 2px solid #333; /* Couleur de la bordure pour la sélection */
+  }
+  to {
+    border: 2px solid white; /* Couleur de la bordure pour la sélection */
+  }
+}
+
 .player-0-pos {
   top: 0;
   left: 0;
