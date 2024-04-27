@@ -1,5 +1,6 @@
 let currentPlayer = 0;
 let currentPlayersPositions = [0, 0, 0, 0];
+let currentDiceResult = 6;
 let numberOfPlayers = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -17,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ) {
       console.log(`Nombre de joueurs: ${numberOfPlayers}`);
       for (let i = 0; i < numberOfPlayers; i++) {
-        let player = document.getElementsByClassName(`player-${i}`)[0];
+        let player = getPlayer(i);
         player.style.display = "flex";
       }
     } else {
@@ -26,27 +27,33 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-document.getElementById("roll-dice").addEventListener("click", () => {
-  const result = Math.floor(Math.random() * 6) + 1;
-  document.getElementById(
-    "dice-result"
-  ).textContent = `Résultat du dé: ${result}`;
+function rollDice() {
+  currentDiceResult = Math.floor(Math.random() * 6) + 1;
+}
+
+function updateDiceDisplay() {
   let dice = document.getElementById("dice");
   let diceFaces = dice.getElementsByClassName(`face`);
-  let diceDrawnedFace = dice.getElementsByClassName(`face-${result}`)[0];
+  let diceDrawnedFace = dice.getElementsByClassName(
+    `face-${currentDiceResult}`
+  )[0];
 
-  console.log(diceFaces);
   for (let diceFace of diceFaces) {
     diceFace.style.display = "none";
   }
 
   diceDrawnedFace.style.display = "flex";
+  diceDrawnedFace.classList.add(`player-${currentPlayer}-color`);
+}
 
-  movePlayer(currentPlayer, result);
+function diceAction() {
+  if (currentDiceResult)
+    getDrawnedDiceFace().classList.remove(`player-${currentPlayer}-color`);
+  rollDice();
+  updateDiceDisplay();
+  movePlayer(currentPlayer, currentDiceResult);
   updatePlayerPosition(currentPlayer);
-  // Met à jour le joueur actuel pour le prochain tour
-  //currentPlayer = (currentPlayer + 1) % numberOfPlayers;
-});
+}
 
 function movePlayer(playerId, steps) {
   let currentPlayerPosition = currentPlayersPositions[playerId];
@@ -61,14 +68,19 @@ function movePlayer(playerId, steps) {
   console.log(currentPlayersPositions);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Logique pour la gestion des mouvements ou de l'état du jeu
-  console.log("Le plateau de jeu Pictionary est prêt !");
-});
+function getPlayer(playerId) {
+  return document.getElementById(`player-${playerId}`);
+}
+
+function getDrawnedDiceFace() {
+  return document
+    .getElementById("dice")
+    .getElementsByClassName(`face-${currentDiceResult}`)[0];
+}
 
 function updatePlayerPosition(playerId) {
   // Récupère l'élément span du joueur
-  const playerSpan = document.getElementById(`player-${playerId}`);
+  const playerSpan = getPlayer(playerId);
 
   // Récupère la case cible où le joueur doit être déplacé
   const targetSquare = document.getElementById(
@@ -83,17 +95,46 @@ function updatePlayerPosition(playerId) {
 }
 
 document.getElementById("draw-card").addEventListener("click", function () {
-  window.open("../", "_blank");
+  window.open("../card/", "_blank");
 });
 
-document.getElementById("lose").addEventListener("click", function () {
-  currentPlayer = (currentPlayer + 1) % numberOfPlayers;
-  updatePlayerTurn();
-});
+function selectPlayer() {
+  let players = document.querySelectorAll(".player");
 
-function updatePlayerTurn() {
-  let joueur = document.getElementById("current-player");
-  joueur.textContent = `Joueur actuel: ${currentPlayer + 1}`;
+  players.forEach(function (player) {
+    player.classList.remove("selected");
+  });
+
+  document.getElementById(`player-${currentPlayer}`).classList.add("selected");
 }
 
-updatePlayerTurn();
+function changePlayer(event) {
+  if (event) {
+    // Ici, 'event.target' fait référence à l'élément cliqué (le span du joueur).
+    const playerId = event.target.id;
+    // Utilisation d'une expression régulière pour extraire le numéro à la fin de l'ID
+    const playerNumberMatch = playerId.match(/player-(\d+)/);
+    const playerNumber = playerNumberMatch ? playerNumberMatch[1] : null;
+
+    // Ou, pour incrémenter un compteur de score ou changer la position, etc.
+    // Vous pouvez utiliser 'playerSpan.id' pour identifier le joueur spécifique si nécessaire.
+
+    getDrawnedDiceFace().classList.remove(`player-${currentPlayer}-color`);
+    currentPlayer = playerNumber;
+    updateDiceDisplay();
+    selectPlayer();
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Logique pour la gestion des mouvements ou de l'état du jeu
+  console.log("Le plateau de jeu Pictionary est prêt !");
+
+  updateDiceDisplay();
+
+  document.getElementById("dice").addEventListener("click", diceAction);
+  document.getElementById("player-0").addEventListener("click", changePlayer);
+  document.getElementById("player-1").addEventListener("click", changePlayer);
+  document.getElementById("player-2").addEventListener("click", changePlayer);
+  document.getElementById("player-3").addEventListener("click", changePlayer);
+});

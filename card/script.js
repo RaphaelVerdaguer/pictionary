@@ -23,8 +23,8 @@ xhr.onload = function () {
 };
 
 // Gérer les erreurs réseau
-xhr.onerror = function() {
-  console.error('Erreur réseau lors du chargement du fichier JSON');
+xhr.onerror = function () {
+  console.error("Erreur réseau lors du chargement du fichier JSON");
 };
 
 // Envoyer la requête
@@ -38,56 +38,44 @@ const categoriesTitle = {
   red: "défi",
 };
 
-function displayCard(card) {
-  for (const [color, value] of Object.entries(card)) {
+var card = document.querySelector(".flip-card-inner");
+const drawButton = document.querySelector(".drawButton");
+
+let timer;
+const timerDelayS = 60;
+const showCardDelayS = 5;
+
+function displayCard(cardData) {
+  for (const [color, value] of Object.entries(cardData)) {
     const categoryContentElement = document
-      .getElementById(color)
+      .getElementsByClassName(color)[0]
       .getElementsByClassName("category-content")[0];
     categoryContentElement.textContent =
       value.charAt(0).toUpperCase() + value.slice(1);
   }
 }
 
-function blurCategoriesValue() {
-  // Floute les valeurs des catégories
-  const categoryContentElements =
-    document.querySelectorAll(".category-content");
-  categoryContentElements.forEach((element) => {
-    element.classList.add("blur");
-    element.classList.add("mask-text");
-  });
-}
-
-function unBlurCategoriesValue() {
-  const categoryContentElements =
-    document.querySelectorAll(".category-content");
-  categoryContentElements.forEach((element) => {
-    element.classList.remove("blur");
-    element.classList.remove("mask-text");
-  });
+function flipCard() {
+  card.classList.toggle("is-flipped");
 }
 
 function seeCard() {
-  unBlurCategoriesValue();
-  setTimeout(blurCategoriesValue, 2000);
+  flipCard();
+  setTimeout(flipCard, showCardDelayS * 1000);
 }
-
-const drawButton = document.querySelector(".drawButton");
-const seeButton = document.querySelector(".seeButton");
-let timer;
 
 function drawCard() {
   drawButton.disabled = true; // Désactive le bouton
-  startTimer(60); // Commence le timer avec une durée de 60 secondes
+  startTimer(timerDelayS); // Commence le timer avec une durée de 60 secondes
 
-  const card = {};
+  const cardData = {};
 
   for (const [color, category] of Object.entries(categories)) {
     const randomIndex = Math.floor(Math.random() * category.length);
-    card[color] = category[randomIndex];
+    cardData[color] = category[randomIndex];
   }
 
-  displayCard(card);
+  displayCard(cardData);
 }
 
 function startTimer(duration) {
@@ -98,17 +86,19 @@ function startTimer(duration) {
     timerValue--;
     drawButton.textContent = timerValue + " s"; // Met à jour le temps restant dans le bouton
 
-    if (duration - timerValue == 2) {
-      blurCategoriesValue();
+    if (duration - timerValue == showCardDelayS) {
+      flipCard();
     }
     if (timerValue <= 0) {
       clearInterval(timer);
       drawButton.disabled = false; // Réactive le bouton
       drawButton.textContent = "Tirer une carte"; // Affiche le texte initial dans le bouton
-      unBlurCategoriesValue();
+      flipCard();
     }
   }, 1000);
 }
 
-drawButton.addEventListener("click", drawCard);
-seeButton.addEventListener("click", seeCard);
+document.addEventListener("DOMContentLoaded", function () {
+  card.addEventListener("click", seeCard);
+  drawButton.addEventListener("click", drawCard);
+});

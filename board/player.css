@@ -1,39 +1,95 @@
+:root {
+  --player-0-color-light: var(--color-grapefruit);
+  --player-0-color-dark: var(--color-grapefruit-dark);
+  --player-1-color-light: var(--color-mint);
+  --player-1-color-dark: var(--color-mint-dark);
+  --player-2-color-light: var(--color-pink-rose);
+  --player-2-color-dark: var(--color-pink-rose-dark);
+  --player-3-color-light: var(--color-blue-jeans);
+  --player-3-color-dark: var(--color-blue-jeans-dark);
+}
 
 .player {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    color: black;
-    border-radius: 50%;
-    border: 1px solid black; /* Juste pour visualiser les cases */
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: black;
+  border-radius: 50%;
+  /*border: 1px solid black; /* Juste pour visualiser les cases */
+
+  display: inline-block;
+  margin: 1px;
+  border: 2px solid #333;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.selected {
+  animation: border-blink 1s infinite alternate; /* Animation de clignotement de l'ombre */
+}
+
+@keyframes border-blink {
+  from {
+    border: 2px solid #333; /* Couleur de la bordure pour la sélection */
   }
-  
-  .player-0 {
-    top: 0;
-    left: 0;
-    background-color: blueviolet; /* Pour une meilleure visibilité */
+  to {
+    border: 2px solid white; /* Couleur de la bordure pour la sélection */
   }
-  
-  .player-1 {
-    top: 0;
-    right: 0;
-    background-color: cyan; /* Pour une meilleure visibilité */
-  }
-  
-  .player-2 {
-    bottom: 0;
-    left: 0;
-    background-color: pink; /* Pour une meilleure visibilité */
-  }
-  
-  .player-3 {
-    bottom: 0;
-    right: 0;
-    background-color: red; /* Pour une meilleure visibilité */
-  }
-  
-  
+}
+
+.player-0-pos {
+  top: 0;
+  left: 0;
+}
+
+.player-0-color {
+  background-image: linear-gradient(
+    135deg,
+    var(--player-0-color-light),
+    var(--player-0-color-dark)
+  );
+}
+
+.player-1-pos {
+  top: 0;
+  right: 0;
+}
+
+.player-1-color {
+  background-image: linear-gradient(
+    135deg,
+    var(--player-1-color-light),
+    var(--player-1-color-dark)
+  );
+}
+
+.player-2-pos {
+  bottom: 0;
+  left: 0;
+}
+
+.player-2-color {
+  background-image: linear-gradient(
+    135deg,
+    var(--player-2-color-light),
+    var(--player-2-color-dark)
+  );
+}
+
+.player-3-pos {
+  bottom: 0;
+  right: 0;
+}
+
+.player-3-color {
+  background-image: linear-gradient(
+    135deg,
+    var(--player-3-color-light),
+    var(--player-3-color-dark)
+  );
+}
