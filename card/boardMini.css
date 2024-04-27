@@ -1,4 +1,3 @@
-
 :root {
   --square-size: 6px;
   --square-border-size: 2px;
@@ -29,4 +28,3 @@
   font-weight: bold;
   border: 1px solid black; /* Juste pour visualiser les cases */
 }
-

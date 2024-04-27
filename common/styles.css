@@ -1,54 +1,64 @@
 :root {
-    --color-yellow: #fff200;
-    --color-blue: #6780c0;
-    --color-orange: #efae57;
-    --color-green: #2bb673;
-    --color-red: #f1592a;
-    --color-black: black;
-    
-    --color-grapefruit-dark: #da4453;
-    --color-grapefruit: #ed5565;
-    --color-bittersweet-dark: #e9573f;
-    --color-bittersweet: #fc6e51;
-    --color-sunflower-dark: #fcbb42;
-    --color-sunflower: #ffce54;
-    --color-grass-dark: #8cc152;
-    --color-grass: #a0d468;
-    --color-mint-dark: #37bc9b;
-    --color-mint: #48cfad;
-    --color-aqua-dark: #3bafda;
-    --color-aqua: #4fc1e9;
-    --color-blue-jeans-dark: #4a89dc;
-    --color-blue-jeans: #5d9cec;
-    --color-lavender-dark: #967adc;
-    --color-lavender: #ac92ec;
-    --color-pink-rose-dark: #d770ad;
-    --color-pink-rose: #ec87c0;
-    --color-light-gray-dark: #e6e9ed;
-    --color-light-gray: #f5f7fa;
-    --color-medium-gray-dark: #aab2bd;
-    --color-medium-gray: #ccd1d9;
-    --color-dark-gray-dark: #434a54;
-    --color-dark-gray: #656d78;
-    --color-sunflower-dark: #fcbb42;
-    --color-sunflower: #ffce54;
-    --color-grass-dark: #8cc152;
-    --color-grass: #a0d468;
-    --color-mint-dark: #37bc9b;
-    --color-mint: #48cfad;
-    --color-aqua-dark: #3bafda;
-    --color-aqua: #4fc1e9, #3bafda;
+  --color-yellow: #fff200;
+  --color-blue: #6780c0;
+  --color-orange: #efae57;
+  --color-green: #2bb673;
+  --color-red: #f1592a;
+  --color-black: black;
 
-  }
-  
+  --color-grapefruit-dark: #da4453;
+  --color-grapefruit: #ed5565;
+  --color-bittersweet-dark: #e9573f;
+  --color-bittersweet: #fc6e51;
+  --color-sunflower-dark: #fcbb42;
+  --color-sunflower: #ffce54;
+  --color-grass-dark: #8cc152;
+  --color-grass: #a0d468;
+  --color-mint-dark: #37bc9b;
+  --color-mint: #48cfad;
+  --color-aqua-dark: #3bafda;
+  --color-aqua: #4fc1e9;
+  --color-blue-jeans-dark: #4a89dc;
+  --color-blue-jeans: #5d9cec;
+  --color-lavender-dark: #967adc;
+  --color-lavender: #ac92ec;
+  --color-pink-rose-dark: #d770ad;
+  --color-pink-rose: #ec87c0;
+  --color-light-gray-dark: #e6e9ed;
+  --color-light-gray: #f5f7fa;
+  --color-medium-gray-dark: #aab2bd;
+  --color-medium-gray: #ccd1d9;
+  --color-dark-gray-dark: #434a54;
+  --color-dark-gray: #656d78;
+  --color-sunflower-dark: #fcbb42;
+  --color-sunflower: #ffce54;
+  --color-grass-dark: #8cc152;
+  --color-grass: #a0d468;
+  --color-mint-dark: #37bc9b;
+  --color-mint: #48cfad;
+  --color-aqua-dark: #3bafda;
+  --color-aqua: #4fc1e9, #3bafda;
+}
 
 /* Styles spécifiques pour les couleurs */
-.red { background-color: var(--color-red); }
-.blue { background-color: var(--color-blue);  }
-.green { background-color: var(--color-green); }
-.yellow { background-color: var(--color-yellow); }
-.orange { background-color: var(--color-orange); }
-.black { background-color: var(--color-black); }
+.red {
+  background-color: var(--color-red);
+}
+.blue {
+  background-color: var(--color-blue);
+}
+.green {
+  background-color: var(--color-green);
+}
+.yellow {
+  background-color: var(--color-yellow);
+}
+.orange {
+  background-color: var(--color-orange);
+}
+.black {
+  background-color: var(--color-black);
+}
 
 .button-container {
   text-align: left;
@@ -61,7 +71,7 @@ button {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  background-color: #007BFF;
+  background-color: #007bff;
   color: white;
   border: none;
   border-radius: 5px;

@@ -38,7 +38,6 @@ const categoriesTitle = {
   red: "défi",
 };
 
-
 var card = document.querySelector(".flip-card-inner");
 const drawButton = document.querySelector(".drawButton");
 

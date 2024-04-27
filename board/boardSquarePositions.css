@@ -1,226 +1,226 @@
 /* Positionnement des cases */
 #square-0 {
-    grid-column: 5;
-    grid-row: 9;
-  }
-  #square-1 {
-    grid-column: 5;
-    grid-row: 10;
-  }
-  #square-2 {
-    grid-column: 5;
-    grid-row: 11;
-  }
-  #square-3 {
-    grid-column: 4;
-    grid-row: 11;
-  }
-  #square-4 {
-    grid-column: 3;
-    grid-row: 11;
-  }
-  #square-5 {
-    grid-column: 2;
-    grid-row: 11;
-  }
-  #square-6 {
-    grid-column: 1;
-    grid-row: 11;
-  }
-  #square-7 {
-    grid-column: 1;
-    grid-row: 10;
-  }
-  #square-8 {
-    grid-column: 1;
-    grid-row: 9;
-  }
-  #square-9 {
-    grid-column: 1;
-    grid-row: 8;
-  }
-  
-  #square-10 {
-    grid-column: 1;
-    grid-row: 7;
-  }
-  #square-11 {
-    grid-column: 2;
-    grid-row: 7;
-  }
-  #square-12 {
-    grid-column: 3;
-    grid-row: 7;
-  }
-  #square-13 {
-    grid-column: 3;
-    grid-row: 6;
-  }
-  #square-14 {
-    grid-column: 3;
-    grid-row: 5;
-  }
-  #square-15 {
-    grid-column: 2;
-    grid-row: 5;
-  }
-  #square-16 {
-    grid-column: 1;
-    grid-row: 5;
-  }
-  #square-17 {
-    grid-column: 1;
-    grid-row: 4;
-  }
-  #square-18 {
-    grid-column: 1;
-    grid-row: 3;
-  }
-  #square-19 {
-    grid-column: 1;
-    grid-row: 2;
-  }
-  
-  #square-20 {
-    grid-column: 1;
-    grid-row: 1;
-  }
-  #square-21 {
-    grid-column: 2;
-    grid-row: 1;
-  }
-  #square-22 {
-    grid-column: 3;
-    grid-row: 1;
-  }
-  #square-23 {
-    grid-column: 4;
-    grid-row: 1;
-  }
-  #square-24 {
-    grid-column: 5;
-    grid-row: 1;
-  }
-  #square-25 {
-    grid-column: 5;
-    grid-row: 2;
-  }
-  #square-26 {
-    grid-column: 5;
-    grid-row: 3;
-  }
-  #square-27 {
-    grid-column: 6;
-    grid-row: 3;
-  }
-  #square-28 {
-    grid-column: 7;
-    grid-row: 3;
-  }
-  #square-29 {
-    grid-column: 7;
-    grid-row: 2;
-  }
-  
-  #square-30 {
-    grid-column: 7;
-    grid-row: 1;
-  }
-  #square-31 {
-    grid-column: 8;
-    grid-row: 1;
-  }
-  #square-32 {
-    grid-column: 9;
-    grid-row: 1;
-  }
-  #square-33 {
-    grid-column: 10;
-    grid-row: 1;
-  }
-  #square-34 {
-    grid-column: 11;
-    grid-row: 1;
-  }
-  #square-35 {
-    grid-column: 11;
-    grid-row: 2;
-  }
-  #square-36 {
-    grid-column: 11;
-    grid-row: 3;
-  }
-  #square-37 {
-    grid-column: 11;
-    grid-row: 4;
-  }
-  #square-38 {
-    grid-column: 11;
-    grid-row: 5;
-  }
-  #square-39 {
-    grid-column: 10;
-    grid-row: 5;
-  }
-  
-  #square-40 {
-    grid-column: 9;
-    grid-row: 5;
-  }
-  #square-41 {
-    grid-column: 9;
-    grid-row: 6;
-  }
-  #square-42 {
-    grid-column: 9;
-    grid-row: 7;
-  }
-  #square-43 {
-    grid-column: 10;
-    grid-row: 7;
-  }
-  #square-44 {
-    grid-column: 11;
-    grid-row: 7;
-  }
-  #square-45 {
-    grid-column: 11;
-    grid-row: 8;
-  }
-  #square-46 {
-    grid-column: 11;
-    grid-row: 9;
-  }
-  #square-47 {
-    grid-column: 11;
-    grid-row: 10;
-  }
-  #square-48 {
-    grid-column: 11;
-    grid-row: 11;
-  }
-  #square-49 {
-    grid-column: 10;
-    grid-row: 11;
-  }
-  
-  #square-50 {
-    grid-column: 9;
-    grid-row: 11;
-  }
-  #square-51 {
-    grid-column: 8;
-    grid-row: 11;
-  }
-  #square-52 {
-    grid-column: 7;
-    grid-row: 11;
-  }
-  #square-53 {
-    grid-column: 7;
-    grid-row: 10;
-  }
-  #square-54 {
-    grid-column: 7;
-    grid-row: 9;
-  }
+  grid-column: 5;
+  grid-row: 9;
+}
+#square-1 {
+  grid-column: 5;
+  grid-row: 10;
+}
+#square-2 {
+  grid-column: 5;
+  grid-row: 11;
+}
+#square-3 {
+  grid-column: 4;
+  grid-row: 11;
+}
+#square-4 {
+  grid-column: 3;
+  grid-row: 11;
+}
+#square-5 {
+  grid-column: 2;
+  grid-row: 11;
+}
+#square-6 {
+  grid-column: 1;
+  grid-row: 11;
+}
+#square-7 {
+  grid-column: 1;
+  grid-row: 10;
+}
+#square-8 {
+  grid-column: 1;
+  grid-row: 9;
+}
+#square-9 {
+  grid-column: 1;
+  grid-row: 8;
+}
+
+#square-10 {
+  grid-column: 1;
+  grid-row: 7;
+}
+#square-11 {
+  grid-column: 2;
+  grid-row: 7;
+}
+#square-12 {
+  grid-column: 3;
+  grid-row: 7;
+}
+#square-13 {
+  grid-column: 3;
+  grid-row: 6;
+}
+#square-14 {
+  grid-column: 3;
+  grid-row: 5;
+}
+#square-15 {
+  grid-column: 2;
+  grid-row: 5;
+}
+#square-16 {
+  grid-column: 1;
+  grid-row: 5;
+}
+#square-17 {
+  grid-column: 1;
+  grid-row: 4;
+}
+#square-18 {
+  grid-column: 1;
+  grid-row: 3;
+}
+#square-19 {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+#square-20 {
+  grid-column: 1;
+  grid-row: 1;
+}
+#square-21 {
+  grid-column: 2;
+  grid-row: 1;
+}
+#square-22 {
+  grid-column: 3;
+  grid-row: 1;
+}
+#square-23 {
+  grid-column: 4;
+  grid-row: 1;
+}
+#square-24 {
+  grid-column: 5;
+  grid-row: 1;
+}
+#square-25 {
+  grid-column: 5;
+  grid-row: 2;
+}
+#square-26 {
+  grid-column: 5;
+  grid-row: 3;
+}
+#square-27 {
+  grid-column: 6;
+  grid-row: 3;
+}
+#square-28 {
+  grid-column: 7;
+  grid-row: 3;
+}
+#square-29 {
+  grid-column: 7;
+  grid-row: 2;
+}
+
+#square-30 {
+  grid-column: 7;
+  grid-row: 1;
+}
+#square-31 {
+  grid-column: 8;
+  grid-row: 1;
+}
+#square-32 {
+  grid-column: 9;
+  grid-row: 1;
+}
+#square-33 {
+  grid-column: 10;
+  grid-row: 1;
+}
+#square-34 {
+  grid-column: 11;
+  grid-row: 1;
+}
+#square-35 {
+  grid-column: 11;
+  grid-row: 2;
+}
+#square-36 {
+  grid-column: 11;
+  grid-row: 3;
+}
+#square-37 {
+  grid-column: 11;
+  grid-row: 4;
+}
+#square-38 {
+  grid-column: 11;
+  grid-row: 5;
+}
+#square-39 {
+  grid-column: 10;
+  grid-row: 5;
+}
+
+#square-40 {
+  grid-column: 9;
+  grid-row: 5;
+}
+#square-41 {
+  grid-column: 9;
+  grid-row: 6;
+}
+#square-42 {
+  grid-column: 9;
+  grid-row: 7;
+}
+#square-43 {
+  grid-column: 10;
+  grid-row: 7;
+}
+#square-44 {
+  grid-column: 11;
+  grid-row: 7;
+}
+#square-45 {
+  grid-column: 11;
+  grid-row: 8;
+}
+#square-46 {
+  grid-column: 11;
+  grid-row: 9;
+}
+#square-47 {
+  grid-column: 11;
+  grid-row: 10;
+}
+#square-48 {
+  grid-column: 11;
+  grid-row: 11;
+}
+#square-49 {
+  grid-column: 10;
+  grid-row: 11;
+}
+
+#square-50 {
+  grid-column: 9;
+  grid-row: 11;
+}
+#square-51 {
+  grid-column: 8;
+  grid-row: 11;
+}
+#square-52 {
+  grid-column: 7;
+  grid-row: 11;
+}
+#square-53 {
+  grid-column: 7;
+  grid-row: 10;
+}
+#square-54 {
+  grid-column: 7;
+  grid-row: 9;
+}

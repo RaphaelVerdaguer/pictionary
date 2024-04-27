@@ -7,17 +7,17 @@
 .dice {
   padding: calc(var(--square-size) * 0.08);
   background-color: var(--dice-background-color);
-  
+
   width: calc(var(--square-size) * 0.8 - 4px);
   height: calc(var(--square-size) * 0.8 - 4px);
   border-radius: 10%;
-  margin-right : 0px;
-  
+  margin-right: 0px;
+
   border: 2px solid var(--dice-border-color); /* Juste pour visualiser les cases */
   cursor: pointer;
 }
 
-.dot{
+.dot {
   display: block;
   width: calc(var(--square-size) / 4);
   height: calc(var(--square-size) / 4);
@@ -31,8 +31,8 @@
   align-items: center;
 }
 
-.face-2{
-  display: flex ;
+.face-2 {
+  display: flex;
   justify-content: space-between;
 }
 
@@ -46,19 +46,23 @@
 }
 
 .face-3 .dot:nth-of-type(1) {
-  align-self :flex-end;
+  align-self: flex-end;
 }
 
 .face-3 .dot:nth-of-type(2) {
-  align-self :center;
+  align-self: center;
 }
 
-.face-4 , .face-6, .face-5{
+.face-4,
+.face-6,
+.face-5 {
   display: flex;
   justify-content: space-between;
 }
 
-.face-4 .column , .face-6 .column, .face-5 .column{
+.face-4 .column,
+.face-6 .column,
+.face-5 .column {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -69,7 +73,7 @@
 }
 
 .face {
-  display: none ;
+  display: none;
 }
 
 #dice {
