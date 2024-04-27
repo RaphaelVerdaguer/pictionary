@@ -98,6 +98,16 @@ document.getElementById("draw-card").addEventListener("click", function () {
   window.open("../card/", "_blank");
 });
 
+function selectPlayer() {
+  let players = document.querySelectorAll(".player");
+
+  players.forEach(function (player) {
+    player.classList.remove("selected");
+  });
+
+  document.getElementById(`player-${currentPlayer}`).classList.add("selected");
+}
+
 function changePlayer(event) {
   if (event) {
     // Ici, 'event.target' fait référence à l'élément cliqué (le span du joueur).
@@ -112,6 +122,7 @@ function changePlayer(event) {
     getDrawnedDiceFace().classList.remove(`player-${currentPlayer}-color`);
     currentPlayer = playerNumber;
     updateDiceDisplay();
+    selectPlayer();
   }
 }
 
