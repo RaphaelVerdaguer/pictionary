@@ -61,9 +61,10 @@
 }
 
 .button-container {
-  text-align: left;
-  height: 300px;
-  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrer horizontalement */
+  justify-content: center; /* Centrer verticalement */
 }
 
 button {
