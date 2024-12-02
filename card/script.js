@@ -82,9 +82,23 @@ function startTimer(duration) {
   let timerValue = duration;
   drawButton.textContent = timerValue + " s"; // Affiche le temps restant dans le bouton
 
+  let toggleRed = false; // Variable pour alterner la couleur
+
   timer = setInterval(function () {
     timerValue--;
     drawButton.textContent = timerValue + " s"; // Met à jour le temps restant dans le bouton
+
+    // Alterner la couleur si le temps restant est inférieur à 10 secondes
+    if (timerValue < 10) {
+      toggleRed = !toggleRed;
+      if (toggleRed) {
+        drawButton.classList.add("button-red");
+      } else {
+        drawButton.classList.remove("button-red");
+      }
+    } else {
+      drawButton.classList.remove("button-red"); // Réinitialise la couleur si le temps est supérieur à 10 secondes
+    }
 
     if (duration - timerValue == showCardDelayS) {
       flipCard();
@@ -93,6 +107,7 @@ function startTimer(duration) {
       clearInterval(timer);
       drawButton.disabled = false; // Réactive le bouton
       drawButton.textContent = "Tirer une carte"; // Affiche le texte initial dans le bouton
+      drawButton.classList.remove("button-red"); // Supprime la classe rouge au reset
       flipCard();
     }
   }, 1000);
