@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <title>Plateau de Pictionary</title>
-    <link rel="stylesheet" href="../common/styles.css">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="player.css">
-    <link rel="stylesheet" href="board.css">
-    <link rel="stylesheet" href="boardSquarePositions.css">
-    <link rel="stylesheet" href="dice.css">
+    <link rel="stylesheet" href="../common/styles.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="player.css" />
+    <link rel="stylesheet" href="board.css" />
+    <link rel="stylesheet" href="boardSquarePositions.css" />
+    <link rel="stylesheet" href="dice.css" />
   </head>
   <body>
     <div id="game-board-border">
@@ -17,14 +18,11 @@
 
         <div id="dice">
           <div class="dice face-1 face">
-            <span class="dot">
-            </span>
+            <span class="dot"></span>
           </div>
           <div class="dice face-2 face">
-            <span class="dot">
-            </span>
-            <span class="dot">
-            </span>
+            <span class="dot"></span>
+            <span class="dot"></span>
           </div>
           <div class="dice face-3 face">
             <span class="dot"></span>
@@ -68,16 +66,29 @@
           </div>
         </div>
 
-        <div class="game-square yellow" id="square-0">P
+        <div class="game-square yellow" id="square-0">
+          P
           <span class="topComment">Start</span>
-          <span id="player-0" class="player player-0-pos player-0-color selected"
-            style="display: none;"></span>
-          <span id="player-1" class="player player-1-pos player-1-color"
-            style="display: none;"></span>
-          <span id="player-2" class="player player-2-pos player-2-color"
-            style="display: none;"></span>
-          <span id="player-3" class="player player-3-pos player-3-color"
-            style="display: none;"></span>
+          <span
+            id="player-0"
+            class="player player-0-pos player-0-color selected"
+            style="display: none"
+          ></span>
+          <span
+            id="player-1"
+            class="player player-1-pos player-1-color"
+            style="display: none"
+          ></span>
+          <span
+            id="player-2"
+            class="player player-2-pos player-2-color"
+            style="display: none"
+          ></span>
+          <span
+            id="player-3"
+            class="player player-3-pos player-3-color"
+            style="display: none"
+          ></span>
         </div>
         <div class="game-square blue" id="square-1">O</div>
         <div class="game-square orange" id="square-2">A</div>
@@ -137,16 +148,22 @@
         <div class="game-square blue" id="square-51">O</div>
         <div class="game-square orange" id="square-52">A</div>
         <div class="game-square green" id="square-53">D</div>
-        <div class="game-square red" id="square-54">AP
-          <span class="topComment">Finish</span></div>
+        <div class="game-square red" id="square-54">
+          AP <span class="topComment">Finish</span>
+        </div>
       </div>
     </div>
-    
+
     <div class="button-container">
       <button id="draw-card">Tirer une carte</button>
     </div>
-    <div>
+    <p></p>
+    <p></p>
+    <div >
+      <!-- Ajoutez votre fichier SVG ici -->
+      <img id="qr-code" src="../common/qr.svg" alt="QR Code" />
+    </div>
 
-      <script src="script.js"></script>
-    </body>
-  </html>
+    <script src="script.js"></script>
+  </body>
+</html>

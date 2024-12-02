@@ -1,19 +1,38 @@
 :root {
-  --square-size: 55px;
+  --square-size-landscape: 8vh; /* 8% de la hauteur de l'écran en mode paysage */
+  --square-size-portrait: 8vw; /* 8% de la largeur de l'écran en mode portrait */
   --square-border-size: 2px;
   --large-font-size: calc(var(--square-size) / 2.5);
   --medium-font-size: calc(var(--square-size) / 4);
   --small-font-size: calc(var(--square-size) / 6);
 }
-body {
-  background-color: rgb(0, 0, 0);
-  background-image: url(http://www.zingerbugimages.com/backgrounds/white_marble_background_seamless.jpg);
-  background-position: top left;
-  background-repeat: repeat;
-  background-attachment: fixed;
 
+/* Pour le mode paysage */
+@media screen and (orientation: landscape) {
+  :root {
+    --square-size: var(--square-size-landscape);
+    --flex-direction: row;
+  }
+}
+
+/* Pour le mode portrait */
+@media screen and (orientation: portrait) {
+  :root {
+    --square-size: var(--square-size-portrait);
+    --flex-direction: column;
+  }
+}
+
+body {
   display: flex;
-  align-items: baseline;
+  flex-direction: var(--flex-direction);
+  align-items: center; /* Centrer horizontalement */
+  justify-content: center; /* Centrer verticalement */
+}
+
+#qr-code {
+  width: 200px; /* Ajustez la taille du code QR selon vos besoins */
+  height: 200px;
 }
 
 .topComment {
