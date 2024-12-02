@@ -1,35 +1,16 @@
-// Créer une nouvelle requête XMLHttpRequest
-const xhr = new XMLHttpRequest();
-
-var categories;
-
-// Spécifier le type de requête et l'URL du fichier JSON
-xhr.open("GET", "./categories.json", true);
-
-// Définir le type de réponse attendue
-xhr.responseType = "json";
-
-// Gérer l'événement de chargement de la réponse
-xhr.onload = function () {
-  if (xhr.status === 200) {
-    // Les données JSON sont accessibles via xhr.response
-    categories = xhr.response;
-    // Utilisez les données JSON ici
-    console.log(categories);
-    drawCard();
-  } else {
-    console.error("Erreur lors du chargement du fichier JSON");
-  }
+// Ajout d'une méthode pour stopper et réinitialiser un Audio
+Audio.prototype.stop = function () {
+  this.pause();
+  this.currentTime = 0;
 };
 
-// Gérer les erreurs réseau
-xhr.onerror = function () {
-  console.error("Erreur réseau lors du chargement du fichier JSON");
-};
-
-// Envoyer la requête
-xhr.send();
-
+// Variables globales
+let beepSound;
+let timer;
+let beepInterval;
+const beepFileName = "./beep-21.mp3";
+const TIMER_DURATION = 60;
+const SHOW_CARD_DELAY = 5;
 const categoriesTitle = {
   yellow: "personne, lieu ou animal",
   blue: "objet",
@@ -37,37 +18,61 @@ const categoriesTitle = {
   green: "mot difficile",
   red: "défi",
 };
+let categories;
 
-var card = document.querySelector(".flip-card-inner");
+// Préparer les éléments DOM
+const card = document.querySelector(".flip-card-inner");
 const drawButton = document.querySelector(".drawButton");
 
-let timer;
-const timerDelayS = 60;
-const showCardDelayS = 5;
+// Fonction principale appelée lors du chargement du document
+document.addEventListener("DOMContentLoaded", function () {
+  beepSound = new Audio(beepFileName); // Charger le fichier audio
+  fetchCategories(); // Charger les catégories JSON
+  addEventListeners(); // Ajouter les événements nécessaires
+});
 
-function displayCard(cardData) {
-  for (const [color, value] of Object.entries(cardData)) {
-    const categoryContentElement = document
-      .getElementsByClassName(color)[0]
-      .getElementsByClassName("category-content")[0];
-    categoryContentElement.textContent =
-      value.charAt(0).toUpperCase() + value.slice(1);
-  }
+// Charger les catégories depuis le fichier JSON
+function fetchCategories() {
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "./categories.json", true);
+  xhr.responseType = "json";
+
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      categories = xhr.response;
+      console.log(categories); // Pour debug
+    } else {
+      console.error("Erreur lors du chargement du fichier JSON");
+    }
+  };
+
+  xhr.onerror = function () {
+    console.error("Erreur réseau lors du chargement du fichier JSON");
+  };
+
+  xhr.send();
 }
 
-function flipCard() {
-  card.classList.toggle("is-flipped");
+// Ajouter les gestionnaires d'événements
+function addEventListeners() {
+  card.addEventListener("click", toggleCardWithDelay);
+  drawButton.addEventListener("click", drawCard);
 }
 
-function seeCard() {
-  flipCard();
-  setTimeout(flipCard, showCardDelayS * 1000);
-}
-
+// Afficher une nouvelle carte
 function drawCard() {
-  drawButton.disabled = true; // Désactive le bouton
-  startTimer(timerDelayS); // Commence le timer avec une durée de 60 secondes
+  if (!categories) {
+    console.error("Les catégories ne sont pas encore chargées.");
+    return;
+  }
+  toggleCardWithDelay();
+  drawButton.disabled = true; // Désactiver le bouton
+  startTimer(TIMER_DURATION); // Démarrer le minuteur
+  displayRandomCard(); // Afficher une carte aléatoire
+}
 
+// Générer et afficher une carte aléatoire
+function displayRandomCard() {
   const cardData = {};
 
   for (const [color, category] of Object.entries(categories)) {
@@ -75,45 +80,91 @@ function drawCard() {
     cardData[color] = category[randomIndex];
   }
 
-  displayCard(cardData);
+  updateCardDisplay(cardData);
 }
 
+// Mettre à jour l'affichage de la carte avec les données générées
+function updateCardDisplay(cardData) {
+  for (const [color, value] of Object.entries(cardData)) {
+    const contentElement = document
+      .getElementsByClassName(color)[0]
+      .getElementsByClassName("category-content")[0];
+    contentElement.textContent = capitalizeFirstLetter(value);
+  }
+}
+
+// Basculer la carte avec un délai
+function toggleCardWithDelay() {
+  flipCard();
+  setTimeout(flipCard, SHOW_CARD_DELAY * 1000);
+}
+
+// Basculer l'état "flippé" de la carte
+function flipCard() {
+  card.classList.toggle("is-flipped");
+}
+
+// Démarrer le minuteur et gérer les bips
 function startTimer(duration) {
-  let timerValue = duration;
-  drawButton.textContent = timerValue + " s"; // Affiche le temps restant dans le bouton
+  let timeRemaining = duration;
 
-  let toggleRed = false; // Variable pour alterner la couleur
+  drawButton.textContent = `${timeRemaining} s`;
 
-  timer = setInterval(function () {
-    timerValue--;
-    drawButton.textContent = timerValue + " s"; // Met à jour le temps restant dans le bouton
+  timer = setInterval(() => {
+    timeRemaining--;
 
-    // Alterner la couleur si le temps restant est inférieur à 10 secondes
-    if (timerValue < 10) {
-      toggleRed = !toggleRed;
-      if (toggleRed) {
-        drawButton.classList.add("button-red");
-      } else {
-        drawButton.classList.remove("button-red");
-      }
-    } else {
-      drawButton.classList.remove("button-red"); // Réinitialise la couleur si le temps est supérieur à 10 secondes
-    }
+    updateTimerDisplay(timeRemaining);
+    handleTimerEvents(timeRemaining);
 
-    if (duration - timerValue == showCardDelayS) {
-      flipCard();
-    }
-    if (timerValue <= 0) {
+    if (timeRemaining <= 0) {
       clearInterval(timer);
-      drawButton.disabled = false; // Réactive le bouton
-      drawButton.textContent = "Tirer une carte"; // Affiche le texte initial dans le bouton
-      drawButton.classList.remove("button-red"); // Supprime la classe rouge au reset
-      flipCard();
+      resetDrawButton();
     }
   }, 1000);
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  card.addEventListener("click", seeCard);
-  drawButton.addEventListener("click", drawCard);
-});
+// Mettre à jour l'affichage du temps restant
+function updateTimerDisplay(timeRemaining) {
+  drawButton.textContent = `${timeRemaining} s`;
+
+  if (timeRemaining < 10) {
+    toggleButtonRedEffect();
+  } else {
+    drawButton.classList.remove("button-red");
+  }
+}
+
+// Gérer les événements du minuteur
+function handleTimerEvents(timeRemaining) {
+  if (timeRemaining <= 10) {
+    playBeep();
+  }
+}
+
+// Jouer un son de bip
+function playBeep() {
+  if (beepSound) {
+    beepSound.stop();
+    beepSound.play().catch((error) => {
+      console.error("Erreur lors de la lecture du bip :", error);
+    });
+  }
+}
+
+// Réinitialiser l'état du bouton de tirage
+function resetDrawButton() {
+  clearInterval(beepInterval); // Arrêter les bips accélérés
+  drawButton.disabled = false;
+  drawButton.textContent = "Tirer une carte";
+  drawButton.classList.remove("button-red");
+}
+
+// Ajouter ou retirer l'effet rouge sur le bouton
+function toggleButtonRedEffect() {
+  drawButton.classList.toggle("button-red");
+}
+
+// Capitaliser la première lettre d'une chaîne
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
