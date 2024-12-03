@@ -98,6 +98,18 @@
   border-radius: 1%;
 }
 
+.category-help {
+  font-size: small;
+  text-align: left;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  margin: 15px;
+  padding: 10px 10px;
+  border-radius: 1%;
+  font-size: medium;
+  font-weight: 700;
+}
+
 .category-content {
   font-size: medium;
   margin-left: 5px;
