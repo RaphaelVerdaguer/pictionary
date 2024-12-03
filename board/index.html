@@ -5,6 +5,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <title>Plateau de Pictionary</title>
     <link rel="stylesheet" href="../common/styles.css" />
+    <link rel="stylesheet" href="../common/boardMini.css" />
+    <link rel="stylesheet" href="../card/styles.css" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="player.css" />
     <link rel="stylesheet" href="board.css" />
@@ -153,17 +155,43 @@
         </div>
       </div>
     </div>
-
-    <div class="button-container">
-      <button id="draw-card">Tirer une carte</button>
-    </div>
     <p></p>
-    <p></p>
-    <div >
-      <!-- Ajoutez votre fichier SVG ici -->
-      <img id="qr-code" src="../common/qr.svg" alt="QR Code" />
-    </div>
 
+
+    <div class="flip-card">
+      <div class="flip-card-inner is-flipped">
+        <div class="flip-card-front">
+          <div class="title">PICTIONARY</div>
+          <div class="category yellow">
+            <div class="category-content"></div>
+            <div class="category-title">P, L, A</div>
+          </div>
+          <div class="category blue">
+            <div class="category-content"></div>
+            <div class="category-title">objet</div>
+          </div>
+          <div class="category orange">
+            <div class="category-content"></div>
+            <div class="category-title">action</div>
+          </div>
+          <div class="category green">
+            <div class="category-content"></div>
+            <div class="category-title">mot difficile</div>
+          </div>
+          <div class="category red">
+            <div class="category-content"></div>
+            <div class="category-title">défi</div>
+          </div>
+        </div>
+        <div class="flip-card-back">
+          <div class="custom-shape">
+          </div>
+          <div id="game-board-qr-mini">
+            <img id="qr-code" src="../common/qr.svg" alt="QR Code" />
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>

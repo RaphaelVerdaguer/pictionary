@@ -31,8 +31,8 @@ body {
 }
 
 #qr-code {
-  width: 200px; /* Ajustez la taille du code QR selon vos besoins */
-  height: 200px;
+  width: 150px; /* Ajustez la taille du code QR selon vos besoins */
+  height: 150px;
 }
 
 .topComment {

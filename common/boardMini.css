@@ -1,0 +1,43 @@
+:root {
+  --square-size-mini: 6px;
+  --square-border-size-mini: 2px;
+  --large-font-size-mini: calc(var(--square-size-mini) / 2.5);
+  --medium-font-size-mini: calc(var(--square-size-mini) / 4);
+  --small-font-size-mini: calc(var(--square-size-mini) / 6);
+}
+
+#game-board-mini {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  grid-template-rows: repeat(11, 1fr);
+  width: calc(var(--square-size-mini) * 11); /* 11 cases * 60px chaque */
+  height: calc(var(--square-size-mini) * 11); /* Même hauteur que largeur */
+  margin: 0 auto;
+  position: absolute; /* Positionnement absolu pour sortir du flux normal du document */
+  z-index: 2; /* S'assure que game-board est au-dessus des autres éléments */
+}
+
+
+#game-board-qr-mini {
+  
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  grid-template-rows: repeat(11, 1fr);
+  width: 150px; /* 11 cases * 60px chaque */
+  height: 150px; /* Même hauteur que largeur */
+  margin: 0 auto;
+  position: absolute; /* Positionnement absolu pour sortir du flux normal du document */
+  z-index: 2; /* S'assure que game-board est au-dessus des autres éléments */
+}
+
+.game-square-mini {
+  position: relative;
+  width: calc(var(--square-size-mini) - var(--square-border-size-mini));
+  height: calc(var(--square-size-mini) - var(--square-border-size-mini));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--medium-font-size-mini);
+  font-weight: bold;
+  border: 1px solid black; /* Juste pour visualiser les cases */
+}

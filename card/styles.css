@@ -152,3 +152,7 @@
     var(--sizeMinusCorner) 0%
   );
 }
+#qr {
+  grid-column: 5;
+  grid-row: 9;
+}
