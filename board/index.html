@@ -5,6 +5,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <title>Plateau de Pictionary</title>
     <link rel="stylesheet" href="../common/styles.css" />
+    <link rel="stylesheet" href="../common/boardMini.css" />
+    <link rel="stylesheet" href="../card/styles.css" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="player.css" />
     <link rel="stylesheet" href="board.css" />
@@ -153,17 +155,42 @@
         </div>
       </div>
     </div>
-
-    <div class="button-container">
-      <button id="draw-card">Tirer une carte</button>
-    </div>
     <p></p>
-    <p></p>
-    <div >
-      <!-- Ajoutez votre fichier SVG ici -->
-      <img id="qr-code" src="../common/qr.svg" alt="QR Code" />
-    </div>
 
+
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <div class="title">PICTIONARY</div>
+          <div class="category-help yellow">
+            <div class="category-title">Personne, Lieu, Animal</div>
+          </div>
+          <div class="category-help blue">
+            <div class="category-title">Objet</div>
+          </div>
+          <div class="category-help orange">
+            <div class="category-help-content"></div>
+            <div class="category-title">Action</div>
+          </div>
+          <div class="category-help green">
+            <div class="category-help-content"></div>
+            <div class="category-title">Mot difficile</div>
+          </div>
+          <div class="category-help red">
+            <div class="category-help-content"></div>
+            <div class="category-title">Défi</div>
+          </div>
+        </div>
+        <div class="flip-card-back">
+          <div class="custom-shape">
+          </div>
+          <div id="game-board-qr-mini">
+            <img id="qr-code" src="../common/qr.svg" alt="QR Code" />
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="script.js"></script>
+    <script src="../card/flipCard.js"></script>
   </body>
 </html>
