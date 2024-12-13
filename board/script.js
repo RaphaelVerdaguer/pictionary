@@ -94,10 +94,6 @@ function updatePlayerPosition(playerId) {
   }
 }
 
-document.getElementById("draw-card").addEventListener("click", function () {
-  window.open("../card/", "_blank");
-});
-
 function selectPlayer() {
   let players = document.querySelectorAll(".player");
 
@@ -137,4 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("player-1").addEventListener("click", changePlayer);
   document.getElementById("player-2").addEventListener("click", changePlayer);
   document.getElementById("player-3").addEventListener("click", changePlayer);
+  document.getElementById("qr-code").addEventListener("click", function () {
+    window.open("../card/", "_blank");
+  });
 });
