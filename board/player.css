@@ -27,6 +27,9 @@
   cursor: pointer;
   border-radius: 5px;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+
+  transition: transform 1s ease; /* Durée et type de transition */
+  z-index: 100;
 }
 
 .selected {
@@ -38,7 +41,7 @@
     border: 2px solid #333; /* Couleur de la bordure pour la sélection */
   }
   to {
-    border: 2px solid white; /* Couleur de la bordure pour la sélection */
+    border: 3px solid white; /* Couleur de la bordure pour la sélection */
   }
 }
 

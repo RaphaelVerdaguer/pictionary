@@ -81,6 +81,7 @@ function getDrawnedDiceFace() {
 function updatePlayerPosition(playerId) {
   // Récupère l'élément span du joueur
   const playerSpan = getPlayer(playerId);
+  const playerActualSquare = playerSpan.parentElement;
 
   // Récupère la case cible où le joueur doit être déplacé
   const targetSquare = document.getElementById(
@@ -89,7 +90,16 @@ function updatePlayerPosition(playerId) {
 
   // Ajoute le span du joueur à la nouvelle case
   if (playerSpan && targetSquare) {
-    targetSquare.appendChild(playerSpan);
+    const targetRect = targetSquare.getBoundingClientRect();
+    const playerActualSquareRect = playerActualSquare.getBoundingClientRect();
+
+    // Calcule la position cible relative au plateau
+    const translateX = targetRect.x-playerActualSquareRect.x;
+    const translateY = targetRect.y-playerActualSquareRect.y;
+
+    // Applique la transformation
+    playerSpan.style.transform = `translate(${translateX}px, ${translateY}px)`;
+
     playerSpan.style.display = "flex"; // Assurez-vous que le span est visible
   }
 }
@@ -159,11 +169,8 @@ function moveSelectedPlayerToSquare(squareId) {
     return;
   }
 
-  targetSquare.appendChild(selectedPlayer);
-
   const playerId = parseInt(selectedPlayer.id.split("-")[1]);
-  const squareIndex = parseInt(squareId.split("-")[1]);
-  currentPlayersPositions[playerId] = squareIndex;
 
+  updatePlayerPosition(playerId)
   console.log(`Joueur ${playerId} déplacé dans la case ${squareIndex}`);
 }
