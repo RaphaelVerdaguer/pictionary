@@ -68,7 +68,7 @@ body {
   background-color: black;
 }
 
-.game-square {
+.game-square, .player-start-position {
   position: relative;
   width: calc(var(--square-size) - var(--square-border-size));
   height: calc(var(--square-size) - var(--square-border-size));

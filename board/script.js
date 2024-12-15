@@ -81,6 +81,7 @@ function getDrawnedDiceFace() {
 function updatePlayerPosition(playerId) {
   // Récupère l'élément span du joueur
   const playerSpan = getPlayer(playerId);
+  const playerActualSquare = playerSpan.parentElement;
 
   // Récupère la case cible où le joueur doit être déplacé
   const targetSquare = document.getElementById(
@@ -89,14 +90,19 @@ function updatePlayerPosition(playerId) {
 
   // Ajoute le span du joueur à la nouvelle case
   if (playerSpan && targetSquare) {
-    targetSquare.appendChild(playerSpan);
+    const targetRect = targetSquare.getBoundingClientRect();
+    const playerActualSquareRect = playerActualSquare.getBoundingClientRect();
+
+    // Calcule la position cible relative au plateau
+    const translateX = targetRect.x-playerActualSquareRect.x;
+    const translateY = targetRect.y-playerActualSquareRect.y;
+
+    // Applique la transformation
+    playerSpan.style.transform = `translate(${translateX}px, ${translateY}px)`;
+
     playerSpan.style.display = "flex"; // Assurez-vous que le span est visible
   }
 }
-
-document.getElementById("draw-card").addEventListener("click", function () {
-  window.open("../card/", "_blank");
-});
 
 function selectPlayer() {
   let players = document.querySelectorAll(".player");
@@ -137,4 +143,34 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("player-1").addEventListener("click", changePlayer);
   document.getElementById("player-2").addEventListener("click", changePlayer);
   document.getElementById("player-3").addEventListener("click", changePlayer);
+
+  // Ajoute des événements de clic sur les cases
+  document.querySelectorAll(".game-square").forEach((square) => {
+    square.addEventListener("click", function () {
+      moveSelectedPlayerToSquare(this.id);
+    });
+  });
+
+  document.getElementById("qr-code").addEventListener("click", function () {
+    window.open("../card/", "_blank");
+  });
 });
+
+function moveSelectedPlayerToSquare(squareId) {
+  const selectedPlayer = document.querySelector(".player.selected");
+  if (!selectedPlayer) {
+    alert("Aucun joueur sélectionné !");
+    return;
+  }
+
+  const targetSquare = document.getElementById(squareId);
+  if (!targetSquare) {
+    console.error(`La case ${squareId} n'existe pas.`);
+    return;
+  }
+
+  const playerId = parseInt(selectedPlayer.id.split("-")[1]);
+
+  updatePlayerPosition(playerId)
+  console.log(`Joueur ${playerId} déplacé dans la case ${squareIndex}`);
+}

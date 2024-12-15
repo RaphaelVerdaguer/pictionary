@@ -1,4 +1,8 @@
 /* Positionnement des cases */
+#player-start-position {
+  grid-column: 5;
+  grid-row: 9;
+}
 #square-0 {
   grid-column: 5;
   grid-row: 9;
