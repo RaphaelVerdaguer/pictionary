@@ -133,7 +133,37 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("player-1").addEventListener("click", changePlayer);
   document.getElementById("player-2").addEventListener("click", changePlayer);
   document.getElementById("player-3").addEventListener("click", changePlayer);
+
+  // Ajoute des événements de clic sur les cases
+  document.querySelectorAll(".game-square").forEach((square) => {
+    square.addEventListener("click", function () {
+      moveSelectedPlayerToSquare(this.id);
+    });
+  });
+
   document.getElementById("qr-code").addEventListener("click", function () {
     window.open("../card/", "_blank");
   });
 });
+
+function moveSelectedPlayerToSquare(squareId) {
+  const selectedPlayer = document.querySelector(".player.selected");
+  if (!selectedPlayer) {
+    alert("Aucun joueur sélectionné !");
+    return;
+  }
+
+  const targetSquare = document.getElementById(squareId);
+  if (!targetSquare) {
+    console.error(`La case ${squareId} n'existe pas.`);
+    return;
+  }
+
+  targetSquare.appendChild(selectedPlayer);
+
+  const playerId = parseInt(selectedPlayer.id.split("-")[1]);
+  const squareIndex = parseInt(squareId.split("-")[1]);
+  currentPlayersPositions[playerId] = squareIndex;
+
+  console.log(`Joueur ${playerId} déplacé dans la case ${squareIndex}`);
+}
