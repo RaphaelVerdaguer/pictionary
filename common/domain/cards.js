@@ -34,6 +34,45 @@ export function drawCard(categories, random = Math.random) {
   return card;
 }
 
+export function createCardRoundState(duration = 60) {
+  return {
+    currentCard: null,
+    timeRemaining: duration,
+    isRunning: false,
+    isRevealed: false,
+  };
+}
+
+export function startCardRound(state, card, duration = 60) {
+  return {
+    ...state,
+    currentCard: card,
+    timeRemaining: duration,
+    isRunning: true,
+    isRevealed: true,
+  };
+}
+
+export function revealCard(state) {
+  if (!state.currentCard) return state;
+  return { ...state, isRevealed: true };
+}
+
+export function hideCard(state) {
+  return { ...state, isRevealed: false };
+}
+
+export function tickCardRound(state) {
+  if (!state.isRunning) return state;
+
+  const timeRemaining = Math.max(0, state.timeRemaining - 1);
+  return {
+    ...state,
+    timeRemaining,
+    isRunning: timeRemaining > 0,
+  };
+}
+
 export function capitalizeFirstLetter(value) {
   if (!value) return "";
   return value.charAt(0).toUpperCase() + value.slice(1);
