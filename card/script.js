@@ -1,20 +1,26 @@
-import { drawCard, capitalizeFirstLetter } from "../common/domain/cards.js";
+import {
+  capitalizeFirstLetter,
+  createCardRoundState,
+  drawCard,
+  hideCard,
+  revealCard,
+  startCardRound,
+  tickCardRound,
+} from "../common/domain/cards.js";
 import { getBoardSquares } from "../common/domain/board.js";
 import { loadCategories } from "../common/infrastructure/categoriesRepository.js";
 import { createAudio, stopAudio } from "../common/infrastructure/audio.js";
 
 const TIMER_DURATION = 60;
-const SHOW_CARD_DELAY = 5;
 const BEEP_FILE = "./beep-21.mp3";
 
 let categories = null;
 let timerId = null;
-let revealTimeoutId = null;
-let timeRemaining = TIMER_DURATION;
 let beepSound = null;
+let roundState = createCardRoundState(TIMER_DURATION);
 
 const card = document.getElementById("card");
-const drawButton = document.getElementById("draw-card");
+const cardControl = document.getElementById("card-control");
 const timerValue = document.getElementById("timer-value");
 const statusMessage = document.getElementById("card-status");
 const miniBoard = document.getElementById("game-board-mini");
@@ -26,17 +32,21 @@ async function init() {
 
   try {
     categories = await loadCategories("./categories.json");
-    statusMessage.textContent = "Cartes pretes.";
-    drawButton.disabled = false;
+    statusMessage.textContent = "Carte prete.";
+    cardControl.setAttribute("aria-disabled", "false");
   } catch (error) {
     statusMessage.textContent = error.message;
-    drawButton.disabled = true;
+    cardControl.setAttribute("aria-disabled", "true");
   }
 }
 
 function bindEvents() {
-  card.addEventListener("click", toggleCard);
-  drawButton.addEventListener("click", handleDrawCard);
+  cardControl.addEventListener("pointerdown", handlePressStart);
+  cardControl.addEventListener("pointerup", handlePressEnd);
+  cardControl.addEventListener("pointercancel", handlePressEnd);
+  cardControl.addEventListener("pointerleave", handlePressEnd);
+  cardControl.addEventListener("keydown", handleKeyDown);
+  cardControl.addEventListener("keyup", handleKeyUp);
 }
 
 function renderMiniBoard() {
@@ -53,15 +63,77 @@ function renderMiniBoard() {
   miniBoard.append(fragment);
 }
 
-function handleDrawCard() {
+function handlePressStart(event) {
+  if (!categories) return;
+
+  event.preventDefault();
+  if (cardControl.setPointerCapture) {
+    cardControl.setPointerCapture(event.pointerId);
+  }
+
+  if (!roundState.isRunning) {
+    startNewRound();
+    return;
+  }
+
+  roundState = revealCard(roundState);
+  renderCardState();
+}
+
+function handlePressEnd(event) {
+  if (!roundState.currentCard) return;
+
+  event.preventDefault();
+  if (
+    cardControl.releasePointerCapture &&
+    cardControl.hasPointerCapture?.(event.pointerId)
+  ) {
+    cardControl.releasePointerCapture(event.pointerId);
+  }
+  hideCurrentCard();
+}
+
+function handleKeyDown(event) {
+  if (event.key !== " " && event.key !== "Enter") return;
+  if (event.repeat) return;
+  if (!categories) return;
+
+  event.preventDefault();
+
+  if (!roundState.isRunning) {
+    startNewRound();
+    return;
+  }
+
+  roundState = revealCard(roundState);
+  renderCardState();
+}
+
+function handleKeyUp(event) {
+  if (event.key !== " " && event.key !== "Enter") return;
+
+  event.preventDefault();
+  hideCurrentCard();
+}
+
+function startNewRound() {
   if (!categories) return;
 
   clearRunningTimers();
-  updateCardDisplay(drawCard(categories));
-  revealCardWithDelay();
+  roundState = startCardRound(
+    roundState,
+    drawCard(categories),
+    TIMER_DURATION
+  );
+  updateCardDisplay(roundState.currentCard);
   startTimer(TIMER_DURATION);
   statusMessage.textContent = "Manche en cours.";
-  drawButton.disabled = true;
+  renderCardState();
+}
+
+function hideCurrentCard() {
+  roundState = hideCard(roundState);
+  renderCardState();
 }
 
 function updateCardDisplay(cardData) {
@@ -71,56 +143,46 @@ function updateCardDisplay(cardData) {
   }
 }
 
-function revealCardWithDelay() {
-  card.classList.remove("is-flipped");
-  revealTimeoutId = setTimeout(() => {
-    card.classList.add("is-flipped");
-  }, SHOW_CARD_DELAY * 1000);
-}
-
-function toggleCard() {
-  card.classList.toggle("is-flipped");
-}
-
 function startTimer(duration) {
-  timeRemaining = duration;
+  roundState = { ...roundState, timeRemaining: duration };
   renderTimer();
 
   timerId = setInterval(() => {
-    timeRemaining -= 1;
+    roundState = tickCardRound(roundState);
     renderTimer();
 
-    if (timeRemaining <= 10 && timeRemaining > 0) {
+    if (roundState.timeRemaining <= 10 && roundState.timeRemaining > 0) {
       playBeep();
     }
 
-    if (timeRemaining <= 0) {
+    if (roundState.timeRemaining <= 0) {
       finishTimer();
     }
   }, 1000);
 }
 
 function renderTimer() {
-  timerValue.textContent = `${timeRemaining} s`;
-  timerValue.classList.toggle("timer-danger", timeRemaining <= 10);
+  timerValue.textContent = `${roundState.timeRemaining} s`;
+  timerValue.classList.toggle("timer-danger", roundState.timeRemaining <= 10);
+}
+
+function renderCardState() {
+  card.classList.toggle("is-flipped", !roundState.isRevealed);
+  cardControl.setAttribute("aria-pressed", String(roundState.isRevealed));
 }
 
 function finishTimer() {
   clearRunningTimers();
-  drawButton.disabled = false;
-  statusMessage.textContent = "Temps ecoule. Vous pouvez tirer une nouvelle carte.";
+  roundState = { ...roundState, isRunning: false };
+  statusMessage.textContent = "Temps ecoule. Nouvelle carte prete.";
   timerValue.classList.remove("timer-danger");
+  renderCardState();
 }
 
 function clearRunningTimers() {
   if (timerId) {
     clearInterval(timerId);
     timerId = null;
-  }
-
-  if (revealTimeoutId) {
-    clearTimeout(revealTimeoutId);
-    revealTimeoutId = null;
   }
 }
 
