@@ -1,181 +1,165 @@
-let currentPlayer = 0;
-let currentPlayersPositions = [0, 0, 0, 0];
-let currentDiceResult = 6;
-let numberOfPlayers = 0;
+import {
+  BOARD_MAX_INDEX,
+  BOARD_CATEGORIES,
+  createGameState,
+  getBoardSquares,
+  movePlayerBySteps,
+  movePlayerToPosition,
+  rollDice,
+  selectPlayer,
+  setPlayerCount,
+} from "../common/domain/board.js";
 
-document.addEventListener("DOMContentLoaded", () => {
-  while (numberOfPlayers <= 1 || numberOfPlayers > 4) {
-    numberOfPlayers = prompt(
-      "Veuillez entrer le nombre de joueurs (Min. 2 - Max. 4):",
-      "2"
-    );
-    numberOfPlayers = parseInt(numberOfPlayers); // Convertit la chaîne de caractères en nombre
+let state = createGameState(2);
 
-    if (
-      !isNaN(numberOfPlayers) &&
-      numberOfPlayers > 1 &&
-      numberOfPlayers <= 4
-    ) {
-      console.log(`Nombre de joueurs: ${numberOfPlayers}`);
-      for (let i = 0; i < numberOfPlayers; i++) {
-        let player = getPlayer(i);
-        player.style.display = "flex";
-      }
-    } else {
-      alert("Veuillez entrer un nombre valide de joueurs.");
-    }
-  }
-});
+const board = document.getElementById("game-board");
+const dice = document.getElementById("dice");
+const startButton = document.getElementById("start-game");
+const playerButtons = Array.from(document.querySelectorAll(".player"));
+const activePlayerStatus = document.getElementById("active-player-status");
+const diceStatus = document.getElementById("dice-status");
+const positionStatus = document.getElementById("position-status");
+const actionStatus = document.getElementById("action-status");
 
-function rollDice() {
-  currentDiceResult = Math.floor(Math.random() * 6) + 1;
+function init() {
+  renderBoardSquares();
+  bindEvents();
+  render();
 }
 
-function updateDiceDisplay() {
-  let dice = document.getElementById("dice");
-  let diceFaces = dice.getElementsByClassName(`face`);
-  let diceDrawnedFace = dice.getElementsByClassName(
-    `face-${currentDiceResult}`
-  )[0];
+function bindEvents() {
+  startButton.addEventListener("click", startGame);
+  dice.addEventListener("click", handleDiceRoll);
 
-  for (let diceFace of diceFaces) {
-    diceFace.style.display = "none";
-  }
-
-  diceDrawnedFace.style.display = "flex";
-  diceDrawnedFace.classList.add(`player-${currentPlayer}-color`);
-}
-
-function diceAction() {
-  if (currentDiceResult)
-    getDrawnedDiceFace().classList.remove(`player-${currentPlayer}-color`);
-  rollDice();
-  updateDiceDisplay();
-  movePlayer(currentPlayer, currentDiceResult);
-  updatePlayerPosition(currentPlayer);
-}
-
-function computeNewPosition(start, target, max = 54) {
-  let pos = target;
-  if (pos > max) pos = max - (pos - max); // rebond
-  return pos;
-}
-
-function setPlayerPosition(playerId, target) {
-  currentPlayersPositions[playerId] = computeNewPosition(
-    currentPlayersPositions[playerId],
-    target
-  );
-}
-
-function movePlayer(playerId, steps) {
-  const current = currentPlayersPositions[playerId];
-  setPlayerPosition(playerId, current + steps);
-}
-
-function getPlayer(playerId) {
-  return document.getElementById(`player-${playerId}`);
-}
-
-function getDrawnedDiceFace() {
-  return document
-    .getElementById("dice")
-    .getElementsByClassName(`face-${currentDiceResult}`)[0];
-}
-
-function updatePlayerPosition(playerId) {
-  // Récupère l'élément span du joueur
-  const playerSpan = getPlayer(playerId);
-  const playerActualSquare = playerSpan.parentElement;
-
-  // Récupère la case cible où le joueur doit être déplacé
-  const targetSquare = document.getElementById(
-    `square-${currentPlayersPositions[playerId]}`
-  );
-
-  // Ajoute le span du joueur à la nouvelle case
-  if (playerSpan && targetSquare) {
-    const targetRect = targetSquare.getBoundingClientRect();
-    const playerActualSquareRect = playerActualSquare.getBoundingClientRect();
-
-    // Calcule la position cible relative au plateau
-    const translateX = targetRect.x - playerActualSquareRect.x;
-    const translateY = targetRect.y - playerActualSquareRect.y;
-
-    // Applique la transformation
-    playerSpan.style.transform = `translate(${translateX}px, ${translateY}px)`;
-
-    playerSpan.style.display = "flex"; // Assurez-vous que le span est visible
-  }
-}
-
-function selectPlayer() {
-  let players = document.querySelectorAll(".player");
-
-  players.forEach(function (player) {
-    player.classList.remove("selected");
-  });
-
-  document.getElementById(`player-${currentPlayer}`).classList.add("selected");
-}
-
-function changePlayer(event) {
-  if (event) {
-    // Ici, 'event.target' fait référence à l'élément cliqué (le span du joueur).
-    const playerId = event.target.id;
-    // Utilisation d'une expression régulière pour extraire le numéro à la fin de l'ID
-    const playerNumberMatch = playerId.match(/player-(\d+)/);
-    const playerNumber = playerNumberMatch ? playerNumberMatch[1] : null;
-
-    // Ou, pour incrémenter un compteur de score ou changer la position, etc.
-    // Vous pouvez utiliser 'playerSpan.id' pour identifier le joueur spécifique si nécessaire.
-
-    getDrawnedDiceFace().classList.remove(`player-${currentPlayer}-color`);
-    currentPlayer = playerNumber;
-    updateDiceDisplay();
-    selectPlayer();
-  }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  // Logique pour la gestion des mouvements ou de l'état du jeu
-  console.log("Le plateau de jeu Pictionary est prêt !");
-
-  updateDiceDisplay();
-
-  document.getElementById("dice").addEventListener("click", diceAction);
-  document.getElementById("player-0").addEventListener("click", changePlayer);
-  document.getElementById("player-1").addEventListener("click", changePlayer);
-  document.getElementById("player-2").addEventListener("click", changePlayer);
-  document.getElementById("player-3").addEventListener("click", changePlayer);
-
-  // Ajoute des événements de clic sur les cases
-  document.querySelectorAll(".game-square").forEach((square) => {
-    square.addEventListener("click", function () {
-      moveSelectedPlayerToSquare(this.id);
+  playerButtons.forEach((playerButton, playerId) => {
+    playerButton.addEventListener("click", () => {
+      state = selectPlayer(state, playerId);
+      render();
     });
   });
+}
 
-  document.getElementById("qr-code").addEventListener("click", function () {
-    window.open("../card/", "_blank");
+function renderBoardSquares() {
+  const fragment = document.createDocumentFragment();
+
+  getBoardSquares().forEach((square) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.id = `square-${square.index}`;
+    button.className = `game-square ${square.category}`;
+    button.dataset.squareIndex = String(square.index);
+    button.style.gridColumn = String(square.column);
+    button.style.gridRow = String(square.row);
+    button.setAttribute(
+      "aria-label",
+      `Case ${square.index}, ${BOARD_CATEGORIES[square.category].label}`
+    );
+    button.textContent = square.label;
+
+    if (square.index === 0 || square.index === BOARD_MAX_INDEX) {
+      const marker = document.createElement("span");
+      marker.className = "topComment";
+      marker.textContent = square.index === 0 ? "Depart" : "Arrivee";
+      button.append(marker);
+    }
+
+    button.addEventListener("click", () => {
+      state = movePlayerToPosition(state, state.currentPlayer, square.index);
+      actionStatus.textContent = `Joueur ${state.currentPlayer + 1} deplace sur la case ${square.index}.`;
+      render();
+    });
+
+    fragment.append(button);
   });
-});
 
-function extractId(str) {
-  const parts = str.split("-");
-  const last = parts[parts.length - 1];
-  const n = Number(last);
-  return Number.isNaN(n) ? null : n;
+  board.append(fragment);
 }
 
-function moveSelectedPlayerToSquare(squareId) {
-  const selectedPlayer = document.querySelector(".player.selected");
-  if (!selectedPlayer) return alert("Aucun joueur sélectionné !");
+function startGame() {
+  const selectedCount = Number(
+    document.querySelector('input[name="player-count"]:checked').value
+  );
 
-  const targetSquare = document.getElementById(squareId);
-  if (!targetSquare) return console.error(`Case ${squareId} introuvable.`);
-
-  const target = extractId(squareId);
-  setPlayerPosition(currentPlayer, target);
-  updatePlayerPosition(currentPlayer);
+  state = setPlayerCount(state, selectedCount);
+  actionStatus.textContent = `Partie demarree avec ${selectedCount} joueurs.`;
+  render();
 }
+
+function handleDiceRoll() {
+  if (!state.hasStarted) {
+    startGame();
+  }
+
+  const result = rollDice();
+  state = {
+    ...movePlayerBySteps(state, state.currentPlayer, result),
+    currentDiceResult: result,
+  };
+
+  actionStatus.textContent = `Joueur ${state.currentPlayer + 1} avance de ${result} case${result > 1 ? "s" : ""}.`;
+  render();
+}
+
+function render() {
+  renderPlayers();
+  renderDice();
+  renderStatus();
+}
+
+function renderPlayers() {
+  playerButtons.forEach((playerButton, playerId) => {
+    const isVisible = playerId < state.playerCount;
+    playerButton.hidden = !isVisible;
+    playerButton.classList.toggle("selected", playerId === state.currentPlayer);
+    playerButton.setAttribute(
+      "aria-pressed",
+      String(playerId === state.currentPlayer)
+    );
+
+    if (isVisible) {
+      movePlayerElement(playerButton, state.positions[playerId]);
+    }
+  });
+}
+
+function movePlayerElement(playerButton, position) {
+  const targetSquare = document.getElementById(`square-${position}`);
+  const startSquare = document.getElementById("player-start-position");
+
+  if (!targetSquare || !startSquare) return;
+
+  const targetRect = targetSquare.getBoundingClientRect();
+  const startRect = startSquare.getBoundingClientRect();
+  const translateX = targetRect.x - startRect.x;
+  const translateY = targetRect.y - startRect.y;
+
+  playerButton.style.transform = `translate(${translateX}px, ${translateY}px)`;
+}
+
+function renderDice() {
+  const faces = dice.querySelectorAll(".face");
+  const selectedFace = dice.querySelector(`.face-${state.currentDiceResult}`);
+
+  faces.forEach((face) => {
+    face.classList.remove(
+      "player-0-color",
+      "player-1-color",
+      "player-2-color",
+      "player-3-color"
+    );
+    face.hidden = true;
+  });
+
+  if (selectedFace) {
+    selectedFace.hidden = false;
+    selectedFace.classList.add(`player-${state.currentPlayer}-color`);
+  }
+}
+
+function renderStatus() {
+  activePlayerStatus.textContent = `Joueur ${state.currentPlayer + 1}`;
+  diceStatus.textContent = String(state.currentDiceResult);
+  positionStatus.textContent = `${state.positions[state.currentPlayer]} / ${BOARD_MAX_INDEX}`;
+}
+
+document.addEventListener("DOMContentLoaded", init);

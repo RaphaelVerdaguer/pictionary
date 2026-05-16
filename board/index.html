@@ -2,194 +2,162 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <title>Plateau de Pictionary</title>
     <link rel="stylesheet" href="../common/styles.css" />
     <link rel="stylesheet" href="player.css" />
     <link rel="stylesheet" href="board.css" />
-    <link rel="stylesheet" href="boardSquarePositions.css" />
     <link rel="stylesheet" href="dice.css" />
-    <link rel="stylesheet" href="../common/boardMini.css" />
-    <link rel="stylesheet" href="../card/styles.css" />
   </head>
   <body>
-    <div id="game-board-border">
-      <div id="game-board">
-        <div id="center-piece">PICTIONARY</div>
+    <main class="board-page" aria-labelledby="app-title">
+      <section class="board-shell" aria-label="Plateau de jeu">
+        <div id="game-board-border">
+          <div id="game-board">
+            <div id="center-piece">
+              <span id="app-title">PICTIONARY</span>
+              <span class="center-subtitle">Plateau de jeu</span>
+            </div>
 
-        <div id="dice">
-          <div class="dice face-1 face">
-            <span class="dot"></span>
-          </div>
-          <div class="dice face-2 face">
-            <span class="dot"></span>
-            <span class="dot"></span>
-          </div>
-          <div class="dice face-3 face">
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-          </div>
-          <div class="face-4 face dice">
-            <div class="column">
-              <span class="dot"></span>
-              <span class="dot"></span>
-            </div>
-            <div class="column">
-              <span class="dot"></span>
-              <span class="dot"></span>
-            </div>
-          </div>
-          <div class="face-5 face dice">
-            <div class="column">
-              <span class="dot"></span>
-              <span class="dot"></span>
-            </div>
-            <div class="column">
-              <span class="dot"></span>
-            </div>
-            <div class="column">
-              <span class="dot"></span>
-              <span class="dot"></span>
-            </div>
-          </div>
-          <div class="face-6 face dice">
-            <div class="column">
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-            </div>
-            <div class="column">
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
+            <button id="dice" type="button" aria-label="Lancer le de">
+              <div class="dice face-1 face" aria-hidden="true">
+                <span class="dot"></span>
+              </div>
+              <div class="dice face-2 face" aria-hidden="true">
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </div>
+              <div class="dice face-3 face" aria-hidden="true">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </div>
+              <div class="face-4 face dice" aria-hidden="true">
+                <div class="column">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+                <div class="column">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+              </div>
+              <div class="face-5 face dice" aria-hidden="true">
+                <div class="column">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+                <div class="column">
+                  <span class="dot"></span>
+                </div>
+                <div class="column">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+              </div>
+              <div class="face-6 face dice" aria-hidden="true">
+                <div class="column">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+                <div class="column">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+              </div>
+            </button>
+
+            <div class="player-start-position" id="player-start-position">
+              <button
+                id="player-0"
+                type="button"
+                class="player player-0-pos player-0-color selected"
+                aria-label="Selectionner joueur 1"
+              ></button>
+              <button
+                id="player-1"
+                type="button"
+                class="player player-1-pos player-1-color"
+                aria-label="Selectionner joueur 2"
+              ></button>
+              <button
+                id="player-2"
+                type="button"
+                class="player player-2-pos player-2-color"
+                aria-label="Selectionner joueur 3"
+              ></button>
+              <button
+                id="player-3"
+                type="button"
+                class="player player-3-pos player-3-color"
+                aria-label="Selectionner joueur 4"
+              ></button>
             </div>
           </div>
         </div>
-        <div class="player-start-position"  id="player-start-position">
-          <span
-            id="player-0"
-            class="player player-0-pos player-0-color selected"
-            style="display: none"
-          ></span>
-          <span
-            id="player-1"
-            class="player player-1-pos player-1-color"
-            style="display: none"
-          ></span>
-          <span
-            id="player-2"
-            class="player player-2-pos player-2-color"
-            style="display: none"
-          ></span>
-          <span
-            id="player-3"
-            class="player player-3-pos player-3-color"
-            style="display: none"
-          ></span>
-        </div>
-        <div class="game-square yellow" id="square-0">P
-          <span class="topComment">Start</span>
-        </div>
-        <div class="game-square blue" id="square-1">O</div>
-        <div class="game-square orange" id="square-2">A</div>
-        <div class="game-square green" id="square-3">D</div>
-        <div class="game-square red" id="square-4">AP</div>
-        <div class="game-square yellow" id="square-5">P</div>
-        <div class="game-square blue" id="square-6">O</div>
-        <div class="game-square orange" id="square-7">A</div>
-        <div class="game-square green" id="square-8">D</div>
-        <div class="game-square red" id="square-9">AP</div>
+      </section>
 
-        <div class="game-square yellow" id="square-10">P</div>
-        <div class="game-square blue" id="square-11">O</div>
-        <div class="game-square orange" id="square-12">A</div>
-        <div class="game-square green" id="square-13">D</div>
-        <div class="game-square red" id="square-14">AP</div>
-        <div class="game-square yellow" id="square-15">P</div>
-        <div class="game-square blue" id="square-16">O</div>
-        <div class="game-square orange" id="square-17">A</div>
-        <div class="game-square green" id="square-18">D</div>
-        <div class="game-square red" id="square-19">AP</div>
+      <aside class="game-panel" aria-label="Controle de partie">
+        <section class="setup-panel" aria-labelledby="setup-title">
+          <h2 id="setup-title">Joueurs</h2>
+          <div class="player-count-control" role="radiogroup" aria-label="Nombre de joueurs">
+            <label>
+              <input type="radio" name="player-count" value="2" checked />
+              <span>2</span>
+            </label>
+            <label>
+              <input type="radio" name="player-count" value="3" />
+              <span>3</span>
+            </label>
+            <label>
+              <input type="radio" name="player-count" value="4" />
+              <span>4</span>
+            </label>
+          </div>
+          <button id="start-game" type="button" class="primary-action">
+            Demarrer
+          </button>
+        </section>
 
-        <div class="game-square yellow" id="square-20">P</div>
-        <div class="game-square blue" id="square-21">O</div>
-        <div class="game-square orange" id="square-22">A</div>
-        <div class="game-square green" id="square-23">D</div>
-        <div class="game-square red" id="square-24">AP</div>
-        <div class="game-square yellow" id="square-25">P</div>
-        <div class="game-square blue" id="square-26">O</div>
-        <div class="game-square orange" id="square-27">A</div>
-        <div class="game-square green" id="square-28">D</div>
-        <div class="game-square red" id="square-29">AP</div>
+        <section class="status-panel" aria-live="polite" aria-label="Etat de la partie">
+          <h2>Partie</h2>
+          <dl>
+            <div>
+              <dt>Joueur actif</dt>
+              <dd id="active-player-status">Joueur 1</dd>
+            </div>
+            <div>
+              <dt>Dernier de</dt>
+              <dd id="dice-status">6</dd>
+            </div>
+            <div>
+              <dt>Position</dt>
+              <dd id="position-status">0 / 54</dd>
+            </div>
+          </dl>
+          <p id="action-status" class="action-status">
+            Configurez la partie puis lancez le de.
+          </p>
+          <a class="card-link" href="../card/" target="_blank" rel="noreferrer">
+            Ouvrir les cartes
+          </a>
+        </section>
 
-        <div class="game-square yellow" id="square-30">P</div>
-        <div class="game-square blue" id="square-31">O</div>
-        <div class="game-square orange" id="square-32">A</div>
-        <div class="game-square green" id="square-33">D</div>
-        <div class="game-square red" id="square-34">AP</div>
-        <div class="game-square yellow" id="square-35">P</div>
-        <div class="game-square blue" id="square-36">O</div>
-        <div class="game-square orange" id="square-37">A</div>
-        <div class="game-square green" id="square-38">D</div>
-        <div class="game-square red" id="square-39">AP</div>
-
-        <div class="game-square yellow" id="square-40">P</div>
-        <div class="game-square blue" id="square-41">O</div>
-        <div class="game-square orange" id="square-42">A</div>
-        <div class="game-square green" id="square-43">D</div>
-        <div class="game-square red" id="square-44">AP</div>
-        <div class="game-square yellow" id="square-45">P</div>
-        <div class="game-square blue" id="square-46">O</div>
-        <div class="game-square orange" id="square-47">A</div>
-        <div class="game-square green" id="square-48">D</div>
-        <div class="game-square red" id="square-49">AP</div>
-
-        <div class="game-square yellow" id="square-50">P</div>
-        <div class="game-square blue" id="square-51">O</div>
-        <div class="game-square orange" id="square-52">A</div>
-        <div class="game-square green" id="square-53">D</div>
-        <div class="game-square red" id="square-54">
-          AP <span class="topComment">Finish</span>
-        </div>
-      </div>
-    </div>
-    <p></p>
-
-
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">
-          <div class="title">PICTIONARY</div>
-          <div class="category-help yellow">
-            <div class="category-title">Personne, Lieu, Animal</div>
-          </div>
-          <div class="category-help blue">
-            <div class="category-title">Objet</div>
-          </div>
-          <div class="category-help orange">
-            <div class="category-help-content"></div>
-            <div class="category-title">Action</div>
-          </div>
-          <div class="category-help green">
-            <div class="category-help-content"></div>
-            <div class="category-title">Mot difficile</div>
-          </div>
-          <div class="category-help red">
-            <div class="category-help-content"></div>
-            <div class="category-title">Défi</div>
-          </div>
-        </div>
-        <div class="flip-card-back">
-          <div class="custom-shape">
-          </div>
-          <div id="game-board-qr-mini">
-            <img id="qr-code" src="../common/qr.svg" alt="QR Code" />
-          </div>
-        </div>
-      </div>
-    </div>
-    <script src="script.js"></script>
-    <script src="../card/flipCard.js"></script>
+        <section class="legend-panel" aria-label="Categories">
+          <h2>Categories</h2>
+          <ul>
+            <li><span class="legend-swatch yellow"></span>Personne, lieu, animal</li>
+            <li><span class="legend-swatch blue"></span>Objet</li>
+            <li><span class="legend-swatch orange"></span>Action</li>
+            <li><span class="legend-swatch green"></span>Mot difficile</li>
+            <li><span class="legend-swatch red"></span>Defi</li>
+          </ul>
+        </section>
+      </aside>
+    </main>
+    <script type="module" src="script.js"></script>
   </body>
 </html>
