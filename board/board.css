@@ -204,6 +204,41 @@ body {
   line-height: 1.4;
 }
 
+.secondary-action {
+  width: 100%;
+  background: white;
+  color: var(--color-ink);
+  border: 1px solid var(--color-line);
+}
+
+.secondary-action:not(:disabled):hover {
+  background: #f5f7fa;
+}
+
+.phone-panel .helper-text {
+  margin: 0 0 var(--space-4);
+  color: var(--color-muted);
+  line-height: 1.4;
+}
+
+#qr-code {
+  width: 124px;
+  height: 124px;
+  display: block;
+  margin: 0 auto;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-small);
+  background: white;
+  padding: 6px;
+}
+
+.qr-link {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  border-radius: var(--radius-small);
+}
+
 .legend-panel ul {
   display: grid;
   gap: var(--space-2);

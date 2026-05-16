@@ -15,6 +15,7 @@ let state = createGameState(2);
 const board = document.getElementById("game-board");
 const dice = document.getElementById("dice");
 const startButton = document.getElementById("start-game");
+const nextPlayerButton = document.getElementById("next-player");
 const playerButtons = Array.from(document.querySelectorAll(".player"));
 const activePlayerStatus = document.getElementById("active-player-status");
 const diceStatus = document.getElementById("dice-status");
@@ -29,6 +30,7 @@ function init() {
 
 function bindEvents() {
   startButton.addEventListener("click", startGame);
+  nextPlayerButton.addEventListener("click", selectNextPlayer);
   dice.addEventListener("click", handleDiceRoll);
 
   playerButtons.forEach((playerButton, playerId) => {
@@ -100,6 +102,18 @@ function handleDiceRoll() {
   render();
 }
 
+function selectNextPlayer() {
+  if (!state.hasStarted) {
+    startGame();
+    return;
+  }
+
+  const nextPlayer = (state.currentPlayer + 1) % state.playerCount;
+  state = selectPlayer(state, nextPlayer);
+  actionStatus.textContent = `Joueur ${nextPlayer + 1} tire sur son telephone.`;
+  render();
+}
+
 function render() {
   renderPlayers();
   renderDice();
@@ -160,6 +174,7 @@ function renderStatus() {
   activePlayerStatus.textContent = `Joueur ${state.currentPlayer + 1}`;
   diceStatus.textContent = String(state.currentDiceResult);
   positionStatus.textContent = `${state.positions[state.currentPlayer]} / ${BOARD_MAX_INDEX}`;
+  nextPlayerButton.disabled = !state.hasStarted;
 }
 
 document.addEventListener("DOMContentLoaded", init);

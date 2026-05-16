@@ -141,8 +141,24 @@
           <p id="action-status" class="action-status">
             Configurez la partie puis lancez le de.
           </p>
-          <a class="card-link" href="../card/" target="_blank" rel="noreferrer">
-            Ouvrir les cartes
+          <button id="next-player" type="button" class="primary-action secondary-action">
+            Joueur suivant
+          </button>
+        </section>
+
+        <section class="phone-panel" aria-label="Cartes sur telephone">
+          <h2>Tirer une carte</h2>
+          <p class="helper-text">
+            Scannez ou clickez sur le QR.
+          </p>
+          <a
+            class="qr-link"
+            href="../card/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Ouvrir la page des cartes"
+          >
+            <img id="qr-code" src="../common/qr.svg" alt="QR code vers les cartes" />
           </a>
         </section>
 
