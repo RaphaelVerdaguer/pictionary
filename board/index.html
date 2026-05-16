@@ -12,6 +12,66 @@
   </head>
   <body>
     <main class="board-page" aria-labelledby="app-title">
+      <section class="status-panel" aria-live="polite" aria-label="Etat de la partie">
+        <div class="setup-header">
+          <div>
+            <p id="setup-kicker" class="panel-kicker">Demarrage</p>
+            <h2 id="setup-title">Joueurs</h2>
+          </div>
+          <span id="player-count-badge" class="player-count-badge">2 joueurs</span>
+        </div>
+        <div id="setup-body">
+          <p class="setup-intro">Choisissez uniquement le nombre de joueurs.</p>
+          <div class="player-count-control" role="radiogroup" aria-label="Nombre de joueurs">
+            <label>
+              <input type="radio" name="player-count" value="2" checked />
+              <span>2</span>
+            </label>
+            <label>
+              <input type="radio" name="player-count" value="3" />
+              <span>3</span>
+            </label>
+            <label>
+              <input type="radio" name="player-count" value="4" />
+              <span>4</span>
+            </label>
+          </div>
+          <button id="start-game" type="button" class="primary-action">
+            Demarrer
+          </button>
+        </div>
+        <div id="game-summary" class="game-summary" hidden>
+          <div class="active-player-card">
+            <span id="active-player-dot" class="active-player-dot player-0-color"></span>
+            <div>
+              <p class="summary-label">Au tour de</p>
+              <p id="active-player-status" class="active-player-name">Joueur 1</p>
+            </div>
+          </div>
+          <dl class="game-metrics">
+            <div>
+              <dt>Case</dt>
+              <dd id="position-status">0 / 54</dd>
+            </div>
+            <div>
+              <dt>De</dt>
+              <dd id="dice-status">6</dd>
+            </div>
+          </dl>
+        </div>
+        <p id="action-status" class="action-status">
+          Configurez la partie.
+        </p>
+        <div class="player-actions" hidden>
+          <button id="next-player" type="button" class="primary-action secondary-action">
+            Joueur suivant
+          </button>
+          <button id="edit-players" type="button" class="secondary-link-button">
+            Modifier
+          </button>
+        </div>
+      </section>
+
       <section class="board-shell" aria-label="Plateau de jeu">
         <div id="game-board-border">
           <div id="game-board">
@@ -101,66 +161,6 @@
       </section>
 
       <aside class="game-panel" aria-label="Controle de partie">
-        <section class="status-panel" aria-live="polite" aria-label="Etat de la partie">
-          <div class="setup-header">
-            <div>
-              <p id="setup-kicker" class="panel-kicker">Demarrage</p>
-              <h2 id="setup-title">Joueurs</h2>
-            </div>
-            <span id="player-count-badge" class="player-count-badge">2 joueurs</span>
-          </div>
-          <div id="setup-body">
-            <p class="setup-intro">Choisissez uniquement le nombre de joueurs.</p>
-            <div class="player-count-control" role="radiogroup" aria-label="Nombre de joueurs">
-              <label>
-                <input type="radio" name="player-count" value="2" checked />
-                <span>2</span>
-              </label>
-              <label>
-                <input type="radio" name="player-count" value="3" />
-                <span>3</span>
-              </label>
-              <label>
-                <input type="radio" name="player-count" value="4" />
-                <span>4</span>
-              </label>
-            </div>
-            <button id="start-game" type="button" class="primary-action">
-              Demarrer
-            </button>
-          </div>
-          <div id="game-summary" class="game-summary" hidden>
-            <div class="active-player-card">
-              <span id="active-player-dot" class="active-player-dot player-0-color"></span>
-              <div>
-                <p class="summary-label">Au tour de</p>
-                <p id="active-player-status" class="active-player-name">Joueur 1</p>
-              </div>
-            </div>
-            <dl class="game-metrics">
-              <div>
-                <dt>Case</dt>
-                <dd id="position-status">0 / 54</dd>
-              </div>
-              <div>
-                <dt>De</dt>
-                <dd id="dice-status">6</dd>
-              </div>
-            </dl>
-          </div>
-          <p id="action-status" class="action-status">
-            Configurez la partie.
-          </p>
-          <div class="player-actions" hidden>
-            <button id="next-player" type="button" class="primary-action secondary-action">
-              Joueur suivant
-            </button>
-            <button id="edit-players" type="button" class="secondary-link-button">
-              Modifier
-            </button>
-          </div>
-        </section>
-
         <section class="phone-panel" aria-label="Cartes sur telephone">
           <h2>Tirer une carte</h2>
           <p class="helper-text">

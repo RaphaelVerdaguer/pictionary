@@ -8,7 +8,7 @@
 
 body {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   padding: var(--space-5);
 }
@@ -22,11 +22,20 @@ body {
 }
 
 .board-shell,
+.status-panel,
 .game-panel section {
   border: 1px solid var(--color-line);
   border-radius: var(--radius-medium);
   background: var(--color-panel);
   box-shadow: var(--shadow-soft);
+}
+
+.status-panel {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 10px var(--space-3);
 }
 
 .board-shell {
@@ -145,20 +154,50 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: var(--space-3);
-  margin-bottom: var(--space-3);
+  flex: 0 0 auto;
+  margin-bottom: 0;
 }
 
 .setup-header h2 {
   margin: 0;
-  font-size: 22px;
+  font-size: 17px;
   line-height: 1.08;
 }
 
+.status-panel.is-playing {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: 10px var(--space-3);
+}
+
+.status-panel.is-playing.is-editing {
+  justify-content: flex-start;
+}
+
 .status-panel.is-playing .setup-header {
-  margin-bottom: var(--space-1);
+  display: none;
+}
+
+.status-panel.is-playing.is-editing .setup-header {
+  display: flex;
+  flex: 0 0 auto;
+  margin-bottom: 0;
+}
+
+.status-panel.is-playing.is-editing #start-game {
+  min-height: 34px;
+  padding: 0 var(--space-4);
+}
+
+.status-panel #start-game {
+  min-height: 34px;
+  padding: 0 var(--space-4);
 }
 
 .panel-kicker {
+  display: none;
   margin: 0 0 var(--space-1);
   color: var(--color-muted);
   font-size: 12px;
@@ -169,7 +208,7 @@ body {
 
 .player-count-badge {
   min-height: 32px;
-  display: inline-flex;
+  display: none;
   align-items: center;
   justify-content: center;
   padding: 0 var(--space-3);
@@ -183,8 +222,10 @@ body {
 }
 
 .status-panel #setup-body {
-  display: grid;
-  gap: var(--space-3);
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: var(--space-2);
 }
 
 .status-panel #setup-body[hidden] {
@@ -192,6 +233,7 @@ body {
 }
 
 .setup-intro {
+  display: none;
   margin: 0;
   color: var(--color-muted);
   line-height: 1.4;
@@ -201,6 +243,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-2);
+  width: min(210px, 100%);
 }
 
 .player-count-control label {
@@ -214,14 +257,14 @@ body {
 }
 
 .player-count-control span {
-  min-height: 46px;
+  min-height: 34px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid var(--color-line);
   border-radius: var(--radius-medium);
   background: #f8fafc;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 800;
   transition:
     border-color 160ms ease,
@@ -246,6 +289,9 @@ body {
 }
 
 .status-panel.is-playing .game-summary {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  flex: 1;
   gap: var(--space-2);
 }
 
@@ -264,7 +310,10 @@ body {
 }
 
 .status-panel.is-playing .active-player-card {
-  padding: var(--space-2) var(--space-3);
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
 
 .active-player-dot {
@@ -283,11 +332,19 @@ body {
   font-weight: 750;
 }
 
+.status-panel.is-playing .summary-label {
+  display: none;
+}
+
 .active-player-name {
   margin: 0;
   font-size: 20px;
   font-weight: 900;
   line-height: 1.1;
+}
+
+.status-panel.is-playing .active-player-name {
+  font-size: 18px;
 }
 
 .game-metrics {
@@ -310,9 +367,10 @@ body {
 }
 
 .status-panel.is-playing .game-metrics div {
-  min-height: 28px;
+  min-width: 50px;
+  min-height: 30px;
   gap: 1px;
-  padding: 0px var(--space-3);
+  padding: 2px var(--space-2);
 }
 
 .status-panel dt {
@@ -330,6 +388,7 @@ body {
 }
 
 .action-status {
+  display: none;
   min-height: 24px;
   margin: var(--space-3) 0 0;
   color: var(--color-muted);
@@ -337,7 +396,7 @@ body {
 }
 
 .status-panel.is-playing .action-status {
-  margin-top: var(--space-1);
+  display: none;
 }
 
 .player-actions {
@@ -348,7 +407,13 @@ body {
 }
 
 .status-panel.is-playing .player-actions {
-  margin-top: var(--space-1);
+  flex: 0 0 auto;
+  margin-top: 0;
+}
+
+.status-panel.is-playing .primary-action,
+.status-panel.is-playing .secondary-link-button {
+  min-height: 34px;
 }
 
 .player-actions[hidden] {
