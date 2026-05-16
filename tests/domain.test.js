@@ -11,7 +11,15 @@ import {
   rollDice,
   setPlayerCount,
 } from "../common/domain/board.js";
-import { drawCard, validateCategories } from "../common/domain/cards.js";
+import {
+  createCardRoundState,
+  drawCard,
+  hideCard,
+  revealCard,
+  startCardRound,
+  tickCardRound,
+  validateCategories,
+} from "../common/domain/cards.js";
 
 test("board exposes 55 generated squares", () => {
   const squares = getBoardSquares();
@@ -64,4 +72,24 @@ test("card draw returns one value per category", () => {
     green: "Perspective",
     red: "Main gauche",
   });
+});
+
+test("card round starts revealed and hides on release", () => {
+  const round = startCardRound(createCardRoundState(60), { blue: "Crayon" }, 60);
+
+  assert.equal(round.isRunning, true);
+  assert.equal(round.isRevealed, true);
+  assert.equal(hideCard(round).isRevealed, false);
+  assert.equal(revealCard(hideCard(round)).isRevealed, true);
+});
+
+test("card round timer stops at zero", () => {
+  let round = startCardRound(createCardRoundState(2), { blue: "Crayon" }, 2);
+
+  round = tickCardRound(round);
+  round = tickCardRound(round);
+  round = tickCardRound(round);
+
+  assert.equal(round.timeRemaining, 0);
+  assert.equal(round.isRunning, false);
 });

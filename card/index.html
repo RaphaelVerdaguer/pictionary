@@ -12,7 +12,15 @@
   <body>
     <main class="card-page" aria-labelledby="card-title">
       <section class="card-stage" aria-label="Carte Pictionary">
-        <div class="flip-card">
+        <div
+          class="flip-card"
+          id="card-control"
+          role="button"
+          tabindex="0"
+          aria-controls="card"
+          aria-disabled="true"
+          aria-label="Carte Pictionary"
+        >
           <div class="flip-card-inner is-flipped" id="card">
             <div class="flip-card-front">
               <h1 class="title" id="card-title">PICTIONARY</h1>
@@ -50,9 +58,6 @@
           <h2>Manche</h2>
           <p class="timer-value" id="timer-value">60 s</p>
           <p class="card-status" id="card-status">Chargement des cartes...</p>
-          <button class="drawButton primary-action" id="draw-card" type="button" disabled>
-            Tirer une carte
-          </button>
         </section>
 
         <section class="card-help" aria-label="Categories">
