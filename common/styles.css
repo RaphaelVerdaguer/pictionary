@@ -1,84 +1,127 @@
 :root {
-  --color-yellow: #fff200;
-  --color-blue: #6780c0;
-  --color-orange: #efae57;
-  --color-green: #2bb673;
-  --color-red: #f1592a;
-  --color-black: black;
-
-  --color-grapefruit-dark: #da4453;
-  --color-grapefruit: #ed5565;
-  --color-bittersweet-dark: #e9573f;
-  --color-bittersweet: #fc6e51;
-  --color-sunflower-dark: #fcbb42;
-  --color-sunflower: #ffce54;
-  --color-grass-dark: #8cc152;
-  --color-grass: #a0d468;
-  --color-mint-dark: #37bc9b;
-  --color-mint: #48cfad;
-  --color-aqua-dark: #3bafda;
-  --color-aqua: #4fc1e9;
-  --color-blue-jeans-dark: #4a89dc;
-  --color-blue-jeans: #5d9cec;
-  --color-lavender-dark: #967adc;
-  --color-lavender: #ac92ec;
-  --color-pink-rose-dark: #d770ad;
-  --color-pink-rose: #ec87c0;
-  --color-light-gray-dark: #e6e9ed;
-  --color-light-gray: #f5f7fa;
-  --color-medium-gray-dark: #aab2bd;
-  --color-medium-gray: #ccd1d9;
-  --color-dark-gray-dark: #434a54;
-  --color-dark-gray: #656d78;
-  --color-sunflower-dark: #fcbb42;
-  --color-sunflower: #ffce54;
-  --color-grass-dark: #8cc152;
-  --color-grass: #a0d468;
-  --color-mint-dark: #37bc9b;
-  --color-mint: #48cfad;
-  --color-aqua-dark: #3bafda;
-  --color-aqua: #4fc1e9, #3bafda;
+  --color-yellow: #f7dd45;
+  --color-blue: #4d79c7;
+  --color-orange: #ee9b42;
+  --color-green: #2fa66d;
+  --color-red: #df553f;
+  --color-ink: #14151a;
+  --color-muted: #616775;
+  --color-line: #d9dde6;
+  --color-panel: #ffffff;
+  --color-page: #f3f5f8;
+  --color-focus: #1d4ed8;
+  --radius-small: 6px;
+  --radius-medium: 8px;
+  --shadow-soft: 0 18px 45px rgba(20, 21, 26, 0.12);
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --font-main: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
 }
 
-/* Styles spécifiques pour les couleurs */
-.red {
-  background-color: var(--color-red);
-}
-.blue {
-  background-color: var(--color-blue);
-}
-.green {
-  background-color: var(--color-green);
-}
-.yellow {
-  background-color: var(--color-yellow);
-}
-.orange {
-  background-color: var(--color-orange);
-}
-.black {
-  background-color: var(--color-black);
+* {
+  box-sizing: border-box;
 }
 
-.button-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centrer horizontalement */
-  justify-content: center; /* Centrer verticalement */
+html {
+  min-height: 100%;
+  background: var(--color-page);
+  color: var(--color-ink);
+  font-family: var(--font-main);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+}
+
+button,
+a,
+input {
+  font: inherit;
 }
 
 button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  transition: background-color 0.3s;
+  border: 0;
 }
 
-button:hover {
-  background-color: #0056b3;
+button:not(:disabled),
+a {
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+}
+
+.yellow {
+  background-color: var(--color-yellow);
+}
+
+.blue {
+  background-color: var(--color-blue);
+}
+
+.green {
+  background-color: var(--color-green);
+}
+
+.orange {
+  background-color: var(--color-orange);
+}
+
+.red {
+  background-color: var(--color-red);
+}
+
+.primary-action {
+  min-height: 44px;
+  padding: 0 var(--space-5);
+  border-radius: var(--radius-medium);
+  background: var(--color-ink);
+  color: white;
+  font-weight: 750;
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease;
+}
+
+.primary-action:not(:disabled):hover {
+  background: #2a2d36;
+  transform: translateY(-1px);
+}
+
+.legend-swatch {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  flex: 0 0 auto;
+  border: 1px solid rgba(20, 21, 26, 0.22);
+  border-radius: 4px;
+}
+
+.board-link,
+.card-link {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-medium);
+  color: var(--color-ink);
+  font-weight: 700;
+  text-decoration: none;
 }

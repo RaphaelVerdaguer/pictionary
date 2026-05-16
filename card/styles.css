@@ -1,154 +1,143 @@
 :root {
+  --card-width: min(340px, 88vw);
+  --card-height: calc(var(--card-width) * 1.34);
   --marge: 30px;
-  --cornerSize: calc(var(--marge));
+  --cornerSize: var(--marge);
   --sizeMinusCorner: calc(100% - var(--cornerSize));
 }
-.container {
-  text-align: center;
-  margin-top: 50px;
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-5);
 }
 
-.drawButton {
-  width: 300px;
-  height: 100px;
-  font-size: 38px;
+.card-page {
+  width: min(920px, 100%);
+  display: grid;
+  grid-template-columns: max-content minmax(280px, 360px);
+  gap: var(--space-5);
+  align-items: center;
 }
 
-.button-red {
-  background-color: red;
-  color: white;
+.card-stage,
+.card-panel section {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-medium);
+  background: var(--color-panel);
+  box-shadow: var(--shadow-soft);
 }
 
-/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.card-stage {
+  padding: var(--space-5);
+}
+
+.card-panel {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.card-panel section {
+  padding: var(--space-5);
+}
+
+.card-panel h2 {
+  margin: 0 0 var(--space-4);
+  font-size: 18px;
+}
+
 .flip-card {
-  margin: 0 auto;
-  background-color: transparent;
-  width: 300px;
-  height: 400px;
-  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  width: var(--card-width);
+  height: var(--card-height);
+  perspective: 1000px;
 }
 
-/* This container is needed to position the front and back side */
 .flip-card-inner {
-  border: 2px solid black;
   position: relative;
   width: 100%;
   height: 100%;
+  border: 2px solid var(--color-ink);
+  border-radius: var(--radius-medium);
   text-align: center;
-  transition: transform 1s;
+  transition: transform 650ms ease;
   transform-style: preserve-3d;
-  border-radius: 1%;
 }
 
-/* CSS qui contrôle le retournement, déclenché par une classe */
 .flip-card-inner.is-flipped {
   transform: rotateY(180deg);
 }
 
-/* Position the front and back side */
 .flip-card-front,
 .flip-card-back {
   position: absolute;
   width: 100%;
   height: 100%;
-  -webkit-backface-visibility: hidden; /* Safari */
+  border-radius: inherit;
+  background-color: #f8f8f8;
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
-/* Style the front side (fallback if image is missing) */
 .flip-card-front {
-  border-radius: inherit;
-  background-color: #f8f8f8;
-  text-align: center;
+  padding: var(--space-5) var(--space-4);
 }
 
-/* Style the back side */
 .flip-card-back {
-  border-radius: inherit;
-  background-color: #f8f8f8;
-  transform: rotateY(180deg);
-  padding: var(--marge); /* Marge intérieure pour pousser l'enfant */
-  box-sizing: border-box; /* S'assurer que le padding est inclus dans la largeur/hauteur */
-  position: relative; /* Conteneur parent relatif pour le positionnement absolu des enfants */
-  display: flex;
-  justify-content: center; /* Centre horizontalement */
-  align-items: center; /* Centre verticalement */
-}
-
-.title {
-  font-size: xx-large;
-  margin-top: 25px;
-  margin-bottom: 50px;
-  margin-left: 25px;
-  margin-right: 20px;
-  letter-spacing: calc(5px);
-  font-stretch: ultra-expanded; /* Augmente la hauteur des lettres */
-  text-decoration: underline; /* Ajoute une ligne sous le mot */
-  text-decoration-thickness: 7px; /* Épaissit la ligne */
-  text-underline-offset: 10px; /* Décale la ligne vers le bas de 3 pixels */
-}
-
-.category {
-  font-size: small;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
-  margin: 15px;
-  padding: 10px 5px;
-  border-radius: 1%;
-}
-
-.category-help {
-  font-size: small;
-  text-align: left;
-  justify-content: space-between;
-  margin-bottom: 15px;
-  margin: 15px;
-  padding: 10px 10px;
-  border-radius: 1%;
-  font-size: medium;
-  font-weight: 700;
-}
-
-.category-content {
-  font-size: medium;
-  margin-left: 5px;
-  font-weight: 700;
-  transition: filter 0.5s ease; /* Ajoute une transition pour une animation fluide */
-}
-
-.custom-shape {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  background-color: black;
-  clip-path: polygon(
-    var(--cornerSize) 0%,
-    var(--cornerSize) var(--cornerSize),
-    0% var(--cornerSize),
-    0% var(--sizeMinusCorner),
-    var(--cornerSize) var(--sizeMinusCorner),
-    var(--cornerSize) 100%,
-    var(--sizeMinusCorner) 100%,
-    var(--sizeMinusCorner) var(--sizeMinusCorner),
-    100% var(--sizeMinusCorner),
-    100% var(--cornerSize),
-    var(--sizeMinusCorner) var(--cornerSize),
-    var(--sizeMinusCorner) 0%
-  );
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1; /* S'assure que game-board est au-dessus des autres éléments */
+  padding: var(--marge);
+  transform: rotateY(180deg);
 }
 
-.custom-shape::after {
-  content: "";
-  width: calc(100% - 5px);
-  height: calc(100% - 5px);
-  position: absolute;
-  background-color: #f8f8f8;
+.title {
+  margin: 0 0 var(--space-6);
+  font-size: clamp(28px, 8vw, 38px);
+  font-weight: 950;
+  letter-spacing: 0;
+  text-decoration: underline;
+  text-decoration-thickness: 6px;
+  text-underline-offset: 9px;
+}
 
+.category {
+  min-height: 52px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  align-items: center;
+  gap: var(--space-3);
+  margin: 0 0 var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-small);
+  color: var(--color-ink);
+  text-align: left;
+}
+
+.category-content {
+  min-width: 0;
+  font-size: clamp(15px, 4.2vw, 18px);
+  font-weight: 850;
+  overflow-wrap: anywhere;
+}
+
+.category-title {
+  color: rgba(20, 21, 26, 0.7);
+  font-size: 12px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.custom-shape {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-ink);
   clip-path: polygon(
     var(--cornerSize) 0%,
     var(--cornerSize) var(--cornerSize),
@@ -164,7 +153,66 @@
     var(--sizeMinusCorner) 0%
   );
 }
-#qr {
-  grid-column: 5;
-  grid-row: 9;
+
+.custom-shape::after {
+  position: absolute;
+  width: calc(100% - 5px);
+  height: calc(100% - 5px);
+  background-color: #f8f8f8;
+  content: "";
+  clip-path: inherit;
+}
+
+.timer-value {
+  margin: 0 0 var(--space-2);
+  font-size: clamp(42px, 9vw, 58px);
+  font-weight: 950;
+}
+
+.timer-danger {
+  color: var(--color-red);
+}
+
+.card-status {
+  min-height: 44px;
+  margin: 0 0 var(--space-4);
+  color: var(--color-muted);
+  line-height: 1.4;
+}
+
+.drawButton {
+  width: 100%;
+}
+
+.card-help ul {
+  display: grid;
+  gap: var(--space-2);
+  padding: 0;
+  margin: 0 0 var(--space-4);
+  list-style: none;
+}
+
+.card-help li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-muted);
+  font-weight: 650;
+}
+
+@media (max-width: 760px) {
+  body {
+    align-items: flex-start;
+    padding: var(--space-3);
+  }
+
+  .card-page {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .card-panel,
+  .card-panel section {
+    width: 100%;
+  }
 }
