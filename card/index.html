@@ -1,115 +1,74 @@
 <!DOCTYPE html>
 <html lang="fr">
-
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tirage de carte</title>
-    <link rel="stylesheet" href="../board/boardSquarePositions.css">
-    <link rel="stylesheet" href="../common/styles.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../common/styles.css" />
     <link rel="stylesheet" href="../common/boardMini.css" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
 
   <body>
-    <div class="container">
-      <div class="flip-card">
-        <div class="flip-card-inner is-flipped">
-          <div class="flip-card-front">
-            <div class="title">PICTIONARY</div>
-            <div class="category yellow">
-              <div class="category-content"></div>
-              <div class="category-title">P, L, A</div>
+    <main class="card-page" aria-labelledby="card-title">
+      <section class="card-stage" aria-label="Carte Pictionary">
+        <div class="flip-card">
+          <div class="flip-card-inner is-flipped" id="card">
+            <div class="flip-card-front">
+              <h1 class="title" id="card-title">PICTIONARY</h1>
+              <div class="category yellow">
+                <div class="category-content" data-category="yellow"></div>
+                <div class="category-title">P, L, A</div>
+              </div>
+              <div class="category blue">
+                <div class="category-content" data-category="blue"></div>
+                <div class="category-title">Objet</div>
+              </div>
+              <div class="category orange">
+                <div class="category-content" data-category="orange"></div>
+                <div class="category-title">Action</div>
+              </div>
+              <div class="category green">
+                <div class="category-content" data-category="green"></div>
+                <div class="category-title">Mot difficile</div>
+              </div>
+              <div class="category red">
+                <div class="category-content" data-category="red"></div>
+                <div class="category-title">Defi</div>
+              </div>
             </div>
-            <div class="category blue">
-              <div class="category-content"></div>
-              <div class="category-title">objet</div>
-            </div>
-            <div class="category orange">
-              <div class="category-content"></div>
-              <div class="category-title">action</div>
-            </div>
-            <div class="category green">
-              <div class="category-content"></div>
-              <div class="category-title">mot difficile</div>
-            </div>
-            <div class="category red">
-              <div class="category-content"></div>
-              <div class="category-title">défi</div>
-            </div>
-          </div>
-          <div class="flip-card-back">
-            <div class="custom-shape">
-              <span class="border-span"></span>
-            </div>
-            <div id="game-board-mini">
-              <div class="game-square-mini" id="square-0"></div>
-              <div class="game-square-mini" id="square-1"></div>
-              <div class="game-square-mini" id="square-2"></div>
-              <div class="game-square-mini" id="square-3"></div>
-              <div class="game-square-mini" id="square-4"></div>
-              <div class="game-square-mini" id="square-5"></div>
-              <div class="game-square-mini" id="square-6"></div>
-              <div class="game-square-mini" id="square-7"></div>
-              <div class="game-square-mini" id="square-8"></div>
-              <div class="game-square-mini" id="square-9"></div>
-
-              <div class="game-square-mini" id="square-10"></div>
-              <div class="game-square-mini" id="square-11"></div>
-              <div class="game-square-mini" id="square-12"></div>
-              <div class="game-square-mini" id="square-13"></div>
-              <div class="game-square-mini" id="square-14"></div>
-              <div class="game-square-mini" id="square-15"></div>
-              <div class="game-square-mini" id="square-16"></div>
-              <div class="game-square-mini" id="square-17"></div>
-              <div class="game-square-mini" id="square-18"></div>
-              <div class="game-square-mini" id="square-19"></div>
-
-              <div class="game-square-mini" id="square-20"></div>
-              <div class="game-square-mini" id="square-21"></div>
-              <div class="game-square-mini" id="square-22"></div>
-              <div class="game-square-mini" id="square-23"></div>
-              <div class="game-square-mini" id="square-24"></div>
-              <div class="game-square-mini" id="square-25"></div>
-              <div class="game-square-mini" id="square-26"></div>
-              <div class="game-square-mini" id="square-27"></div>
-              <div class="game-square-mini" id="square-28"></div>
-              <div class="game-square-mini" id="square-29"></div>
-
-              <div class="game-square-mini" id="square-30"></div>
-              <div class="game-square-mini" id="square-31"></div>
-              <div class="game-square-mini" id="square-32"></div>
-              <div class="game-square-mini" id="square-33"></div>
-              <div class="game-square-mini" id="square-34"></div>
-              <div class="game-square-mini" id="square-35"></div>
-              <div class="game-square-mini" id="square-36"></div>
-              <div class="game-square-mini" id="square-37"></div>
-              <div class="game-square-mini" id="square-38"></div>
-              <div class="game-square-mini" id="square-39"></div>
-
-              <div class="game-square-mini" id="square-40"></div>
-              <div class="game-square-mini" id="square-41"></div>
-              <div class="game-square-mini" id="square-42"></div>
-              <div class="game-square-mini" id="square-43"></div>
-              <div class="game-square-mini" id="square-44"></div>
-              <div class="game-square-mini" id="square-45"></div>
-              <div class="game-square-mini" id="square-46"></div>
-              <div class="game-square-mini" id="square-47"></div>
-              <div class="game-square-mini" id="square-48"></div>
-              <div class="game-square-mini" id="square-49"></div>
-
-              <div class="game-square-mini" id="square-50"></div>
-              <div class="game-square-mini" id="square-51"></div>
-              <div class="game-square-mini" id="square-52"></div>
-              <div class="game-square-mini" id="square-53"></div>
-              <div class="game-square-mini" id="square-54"></div>
+            <div class="flip-card-back">
+              <div class="custom-shape" aria-hidden="true"></div>
+              <div id="game-board-mini" aria-hidden="true"></div>
             </div>
           </div>
         </div>
-        <button class="drawButton">Tirer une carte</button>
-      </div>
+      </section>
 
-      <script src="script.js"></script>
-    </body>
+      <aside class="card-panel" aria-label="Controle des cartes">
+        <section class="timer-panel" aria-live="polite">
+          <h2>Manche</h2>
+          <p class="timer-value" id="timer-value">60 s</p>
+          <p class="card-status" id="card-status">Chargement des cartes...</p>
+          <button class="drawButton primary-action" id="draw-card" type="button" disabled>
+            Tirer une carte
+          </button>
+        </section>
 
-  </html>
+        <section class="card-help" aria-label="Categories">
+          <h2>Categories</h2>
+          <ul>
+            <li><span class="legend-swatch yellow"></span>Personne, lieu, animal</li>
+            <li><span class="legend-swatch blue"></span>Objet</li>
+            <li><span class="legend-swatch orange"></span>Action</li>
+            <li><span class="legend-swatch green"></span>Mot difficile</li>
+            <li><span class="legend-swatch red"></span>Defi</li>
+          </ul>
+          <a class="board-link" href="../board/">Retour au plateau</a>
+        </section>
+      </aside>
+    </main>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
