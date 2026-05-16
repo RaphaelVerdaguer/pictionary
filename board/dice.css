@@ -1,26 +1,34 @@
 :root {
-  --dice-background-color: var(--color-light-gray-dark);
-  --dice-border-color: var(--color-medium-gray-dark);
-  --dice-dot-color: var(--color-dark-gray-dark);
+  --dice-background-color: #f5f7fa;
+  --dice-border-color: #b9c0cd;
+  --dice-dot-color: #303642;
+}
+
+#dice {
+  grid-column: 9;
+  grid-row: 9;
+  width: calc(var(--square-size) - var(--square-border-size));
+  height: calc(var(--square-size) - var(--square-border-size));
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border-radius: var(--radius-small);
+  z-index: 20;
 }
 
 .dice {
-  padding: calc(var(--square-size) * 0.08);
+  width: 100%;
+  height: 100%;
+  padding: calc(var(--square-size) * 0.09);
   background-color: var(--dice-background-color);
-
-  width: calc(var(--square-size) * 0.8 - 4px);
-  height: calc(var(--square-size) * 0.8 - 4px);
-  border-radius: 10%;
-  margin-right: 0px;
-
-  border: 2px solid var(--dice-border-color); /* Juste pour visualiser les cases */
-  cursor: pointer;
+  border: 2px solid var(--dice-border-color);
+  border-radius: var(--radius-small);
 }
 
 .dot {
   display: block;
-  width: calc(var(--square-size) / 4);
-  height: calc(var(--square-size) / 4);
+  width: calc(var(--square-size) / 4.8);
+  height: calc(var(--square-size) / 4.8);
   border-radius: 50%;
   background-color: var(--dice-dot-color);
 }
@@ -54,15 +62,15 @@
 }
 
 .face-4,
-.face-6,
-.face-5 {
+.face-5,
+.face-6 {
   display: flex;
   justify-content: space-between;
 }
 
 .face-4 .column,
-.face-6 .column,
-.face-5 .column {
+.face-5 .column,
+.face-6 .column {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -72,11 +80,6 @@
   justify-content: center;
 }
 
-.face {
+.face[hidden] {
   display: none;
-}
-
-#dice {
-  grid-column: 9;
-  grid-row: 9;
 }
