@@ -15,9 +15,18 @@ let state = createGameState(2);
 const board = document.getElementById("game-board");
 const dice = document.getElementById("dice");
 const startButton = document.getElementById("start-game");
+const setupPanel = document.querySelector(".status-panel");
+const setupKicker = document.getElementById("setup-kicker");
+const playerCountBadge = document.getElementById("player-count-badge");
+const setupBody = document.getElementById("setup-body");
+const gameSummary = document.getElementById("game-summary");
+const editPlayersButton = document.getElementById("edit-players");
 const nextPlayerButton = document.getElementById("next-player");
+const playerActions = document.querySelector(".player-actions");
 const playerButtons = Array.from(document.querySelectorAll(".player"));
+const playerCountInputs = Array.from(document.querySelectorAll('input[name="player-count"]'));
 const activePlayerStatus = document.getElementById("active-player-status");
+const activePlayerDot = document.getElementById("active-player-dot");
 const diceStatus = document.getElementById("dice-status");
 const positionStatus = document.getElementById("position-status");
 const actionStatus = document.getElementById("action-status");
@@ -30,8 +39,13 @@ function init() {
 
 function bindEvents() {
   startButton.addEventListener("click", startGame);
+  editPlayersButton.addEventListener("click", showPlayerSetup);
   nextPlayerButton.addEventListener("click", selectNextPlayer);
   dice.addEventListener("click", handleDiceRoll);
+
+  playerCountInputs.forEach((input) => {
+    input.addEventListener("change", renderStatus);
+  });
 
   playerButtons.forEach((playerButton, playerId) => {
     playerButton.addEventListener("click", () => {
@@ -84,6 +98,17 @@ function startGame() {
 
   state = setPlayerCount(state, selectedCount);
   actionStatus.textContent = `Partie demarree avec ${selectedCount} joueurs.`;
+  hidePlayerSetup();
+  render();
+}
+
+function hidePlayerSetup() {
+  setupPanel.classList.remove("is-editing");
+}
+
+function showPlayerSetup() {
+  setupPanel.classList.add("is-editing");
+  actionStatus.textContent = "Changer le nombre de joueurs relance une partie.";
   render();
 }
 
@@ -171,10 +196,27 @@ function renderDice() {
 }
 
 function renderStatus() {
+  const isEditingPlayers = setupPanel.classList.contains("is-editing");
+  const showSetup = !state.hasStarted || isEditingPlayers;
+  const selectedPlayerCount = Number(
+    document.querySelector('input[name="player-count"]:checked').value
+  );
+
+  setupPanel.classList.toggle("is-playing", state.hasStarted);
+  setupPanel.classList.toggle("is-starting", !state.hasStarted);
+  setupBody.hidden = !showSetup;
+  gameSummary.hidden = !state.hasStarted || isEditingPlayers;
+  setupKicker.textContent = state.hasStarted ? "Partie en cours" : "Demarrage";
+  playerCountBadge.textContent = `${showSetup ? selectedPlayerCount : state.playerCount} joueurs`;
+  startButton.textContent = state.hasStarted ? "Relancer" : "Demarrer";
   activePlayerStatus.textContent = `Joueur ${state.currentPlayer + 1}`;
+  activePlayerDot.className = `active-player-dot player-${state.currentPlayer}-color`;
   diceStatus.textContent = String(state.currentDiceResult);
   positionStatus.textContent = `${state.positions[state.currentPlayer]} / ${BOARD_MAX_INDEX}`;
   nextPlayerButton.disabled = !state.hasStarted;
+  nextPlayerButton.hidden = !state.hasStarted || isEditingPlayers;
+  editPlayersButton.hidden = !state.hasStarted || isEditingPlayers;
+  playerActions.hidden = !state.hasStarted || isEditingPlayers;
 }
 
 document.addEventListener("DOMContentLoaded", init);
