@@ -7,12 +7,13 @@
   --player-2-color-dark: var(--color-pink-rose-dark);
   --player-3-color-light: var(--color-blue-jeans);
   --player-3-color-dark: var(--color-blue-jeans-dark);
+  --player-size: calc(var(--square-size) / 3);
 }
 
 .player {
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: var(--player-size);
+  height: var(--player-size);
   display: flex;
   align-items: center;
   justify-content: center;

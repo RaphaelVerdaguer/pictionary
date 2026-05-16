@@ -55,17 +55,22 @@ function diceAction() {
   updatePlayerPosition(currentPlayer);
 }
 
+function computeNewPosition(start, target, max = 54) {
+  let pos = target;
+  if (pos > max) pos = max - (pos - max); // rebond
+  return pos;
+}
+
+function setPlayerPosition(playerId, target) {
+  currentPlayersPositions[playerId] = computeNewPosition(
+    currentPlayersPositions[playerId],
+    target
+  );
+}
+
 function movePlayer(playerId, steps) {
-  let currentPlayerPosition = currentPlayersPositions[playerId];
-  const newPosition = currentPlayerPosition + steps;
-
-  currentPlayerPosition = newPosition;
-  // Gestion du dépassement pour un plateau de 55 cases
-  if (currentPlayerPosition > 54)
-    currentPlayerPosition = 54 - (currentPlayerPosition - 54);
-
-  currentPlayersPositions[playerId] = currentPlayerPosition;
-  console.log(currentPlayersPositions);
+  const current = currentPlayersPositions[playerId];
+  setPlayerPosition(playerId, current + steps);
 }
 
 function getPlayer(playerId) {
@@ -94,8 +99,8 @@ function updatePlayerPosition(playerId) {
     const playerActualSquareRect = playerActualSquare.getBoundingClientRect();
 
     // Calcule la position cible relative au plateau
-    const translateX = targetRect.x-playerActualSquareRect.x;
-    const translateY = targetRect.y-playerActualSquareRect.y;
+    const translateX = targetRect.x - playerActualSquareRect.x;
+    const translateY = targetRect.y - playerActualSquareRect.y;
 
     // Applique la transformation
     playerSpan.style.transform = `translate(${translateX}px, ${translateY}px)`;
@@ -156,21 +161,21 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+function extractId(str) {
+  const parts = str.split("-");
+  const last = parts[parts.length - 1];
+  const n = Number(last);
+  return Number.isNaN(n) ? null : n;
+}
+
 function moveSelectedPlayerToSquare(squareId) {
   const selectedPlayer = document.querySelector(".player.selected");
-  if (!selectedPlayer) {
-    alert("Aucun joueur sélectionné !");
-    return;
-  }
+  if (!selectedPlayer) return alert("Aucun joueur sélectionné !");
 
   const targetSquare = document.getElementById(squareId);
-  if (!targetSquare) {
-    console.error(`La case ${squareId} n'existe pas.`);
-    return;
-  }
+  if (!targetSquare) return console.error(`Case ${squareId} introuvable.`);
 
-  const playerId = parseInt(selectedPlayer.id.split("-")[1]);
-
-  updatePlayerPosition(playerId)
-  console.log(`Joueur ${playerId} déplacé dans la case ${squareIndex}`);
+  const target = extractId(squareId);
+  setPlayerPosition(currentPlayer, target);
+  updatePlayerPosition(currentPlayer);
 }
